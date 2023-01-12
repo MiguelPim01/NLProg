@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "indicepalavras.h": "c"
+        "indicepalavras.h": "c",
+        "indicedoc.h": "c"
     }
 }
