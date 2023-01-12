@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "documento.h"
+#include "../headers/documento.h"
 
 struct indiceDoc {
     Documento **arrayDocs;

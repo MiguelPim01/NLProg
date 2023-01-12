@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "caracteristicas.h"
-#include "indiceDoc.h"
+#include "../headers/caracteristicas.h"
+#include "../headers/indiceDoc.h"
 
 struct palavra {
     char *palavra;
