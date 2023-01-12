@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "palavra.h"
+#include "../headers/palavra.h"
 
 struct indicePalavras {
     Palavra **arrayPalavras;
