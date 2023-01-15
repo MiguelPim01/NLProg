@@ -9,5 +9,4 @@ struct palavra {
     char *palavra;
     Caracteristicas **c;
     int qtdAparicoes;
-    double tfidf;
 };

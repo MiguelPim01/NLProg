@@ -4,4 +4,5 @@
 
 struct caracteristicas {
     int posicao, frequencia;
+    double tfidf;
 };
