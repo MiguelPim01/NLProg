@@ -51,9 +51,8 @@ void ImprimeDocs(IndiceDocs *docs)
 
     for (i = 0; i < docs->qtdDocs; i++)
     {
-        printf("doc %d:\n", i);
+        printf("doc %d: ", i);
         ImprimeDoc(docs->arrayDocs[i]);
-        printf("\n");
     }
 }
 

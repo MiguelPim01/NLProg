@@ -25,12 +25,23 @@ Palavra * AtribuiPalavra(Palavra *p, char *palavra)
     return p;
 }
 
+int EhRepetida(Palavra *p, char *palavra)
+{
+    if (!strcmp(p->palavra, palavra))
+    {
+        return 1;
+    }
+    
+    return 0;
+}
+
 void ImprimePalavra(Palavra *p)
 {
-    printf("%s ", p->palavra);
+    printf("%s\n", p->palavra);
 }
 
 void LiberaPalavra(Palavra *p)
 {
     free(p->palavra);
+    free(p);
 }

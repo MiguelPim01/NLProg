@@ -30,8 +30,7 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
     char caminho[50], palavra[50];
     palavra[0] = '\0';
 
-    sprintf(caminho, "datasets/%s", caminhoAux);
-    printf("caminho %s\n", caminho);
+    sprintf(caminho, "data/%s", caminhoAux);
 
     fileDoc = fopen(caminho, "r");
 
@@ -44,10 +43,15 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {
         fscanf(fileDoc, "%*c");
-        printf("%s\n", palavra);
-        p->arrayPalavras[p->qtdPalavras] = AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
 
-        p->qtdPalavras++;
+        if (ProcuraRepetida(p, palavra))
+        {
+            // AtribuiFrequencia()
+        } else {
+            p->arrayPalavras[p->qtdPalavras] = AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
+
+            p->qtdPalavras++;
+        }
 
         if (p->qtdPalavras >= mult)
         {
@@ -59,6 +63,20 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
     fclose(fileDoc);
 
     return p;
+}
+
+int ProcuraRepetida(IndicePalavras *p, char *palavra)
+{
+    int i;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        if (EhRepetida(p->arrayPalavras[i], palavra)) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 void LiberaIndicePalavras(IndicePalavras *p)
@@ -76,9 +94,10 @@ void LiberaIndicePalavras(IndicePalavras *p)
 void ImprimePalavras(IndicePalavras *p)
 {
     int i;
-
+    
     for (i = 0; i < p->qtdPalavras; i++)
     {
+        printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
     }
 }
