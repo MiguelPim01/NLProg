@@ -31,7 +31,12 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho)
     palavra[0] = '\0';
 
     fileDoc = fopen(caminho, "r");
-    printf("%s\n", caminho);
+
+    if (fileDoc == NULL)
+    {
+        printf("ERRO: Não foi possível abrir o documento com o caminho %s.\n", caminho);
+        exit(1);
+    }
 
     while (fscanf(fileDoc, "%[^ ] ", palavra) == 1)
     {
