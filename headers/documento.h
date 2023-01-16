@@ -3,4 +3,10 @@
 
 typedef struct documento Documento;
 
+void AtribuiNomeClasse(Documento *doc, char *nome, char *classe);
+
+void ImprimeDoc(Documento *doc);
+
+void LiberaDoc(Documento *doc);
+
 #endif

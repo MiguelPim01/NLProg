@@ -1,11 +1,14 @@
 #include <stdio.h>
 
-#include "../headers/indiceDoc.h"
+#include "../headers/indiceDocs.h"
 #include "../headers/indicePalavras.h"
+#include "../headers/indices.h"
 
 int main(int argc, char *argv[])
 {
     FILE *fileTxt, *fileIndice;
+    Indices *indices = NULL;
+
     char caminho[100];
 
     if (argc <= 2)
@@ -26,6 +29,7 @@ int main(int argc, char *argv[])
     }
 
     // PASSO 1 (Ler os arquivos de noticias e criar os vetores de palavra e documento):
+    indices = CarregaIndices(fileTxt, indices);
 
     // Arbindo o arquivo de saida do programa (indice)
     sprintf(caminho, "%s", argv[2]);

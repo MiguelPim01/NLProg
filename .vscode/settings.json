@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "indicepalavras.h": "c",
-        "indicedoc.h": "c"
+        "indicedoc.h": "c",
+        "indicedocs.h": "c",
+        "documento.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "uteis.h": "c",
+        "stdio.h": "c",
+        "indices.h": "c"
     }
 }
