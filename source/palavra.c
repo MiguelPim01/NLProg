@@ -27,7 +27,7 @@ Palavra * AtribuiPalavra(Palavra *p, char *palavra)
 
 void ImprimePalavra(Palavra *p)
 {
-    printf("P: %s\n", p->palavra);
+    printf("%s ", p->palavra);
 }
 
 void LiberaPalavra(Palavra *p)

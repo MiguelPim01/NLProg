@@ -23,12 +23,15 @@ IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
     return palavras;
 }
 
-IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho)
+IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
 {
     FILE *fileDoc;
     static int mult = 25;
-    char palavra[50];
+    char caminho[50], palavra[50];
     palavra[0] = '\0';
+
+    sprintf(caminho, "datasets/%s", caminhoAux);
+    printf("caminho %s\n", caminho);
 
     fileDoc = fopen(caminho, "r");
 
@@ -38,8 +41,9 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho)
         exit(1);
     }
 
-    while (fscanf(fileDoc, "%[^ ] ", palavra) == 1)
+    while (fscanf(fileDoc, "%s", palavra) == 1)
     {
+        fscanf(fileDoc, "%*c");
         printf("%s\n", palavra);
         p->arrayPalavras[p->qtdPalavras] = AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
 

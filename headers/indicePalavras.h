@@ -5,7 +5,7 @@ typedef struct indicePalavras IndicePalavras;
 
 IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras);
 
-IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho);
+IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux);
 
 void LiberaIndicePalavras(IndicePalavras *p);
 
