@@ -28,18 +28,21 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho)
     FILE *fileDoc;
     static int mult = 25;
     char palavra[50];
+    palavra[0] = '\0';
 
     fileDoc = fopen(caminho, "r");
     printf("%s\n", caminho);
 
-    while (fscanf(fileDoc, "%s", palavra) == 1)
+    while (fscanf(fileDoc, "%[^ ] ", palavra) == 1)
     {
-        AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
+        printf("%s\n", palavra);
+        p->arrayPalavras[p->qtdPalavras] = AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
+
         p->qtdPalavras++;
 
         if (p->qtdPalavras >= mult)
         {
-            mult *=2;
+            mult *= 2;
             p->arrayPalavras = (Palavra **)realloc(p->arrayPalavras, mult*sizeof(Palavra *));
         }
     }
@@ -57,6 +60,16 @@ void LiberaIndicePalavras(IndicePalavras *p)
     {
         LiberaPalavra(p->arrayPalavras[i]);
     }
-
+    free(p->arrayPalavras);
     free(p);
+}
+
+void ImprimePalavras(IndicePalavras *p)
+{
+    int i;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        ImprimePalavra(p->arrayPalavras[i]);
+    }
 }

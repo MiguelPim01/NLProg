@@ -3,7 +3,7 @@
 
 typedef struct documento Documento;
 
-void AtribuiNomeClasse(Documento *doc, char *nome, char *classe);
+Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe);
 
 void ImprimeDoc(Documento *doc);
 

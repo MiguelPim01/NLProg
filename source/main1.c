@@ -43,6 +43,8 @@ int main(int argc, char *argv[])
 
     // PASSO 2 (Salvar vetores em um arquivo binario):
 
+    LiberaIndices(indices);
+
     fclose(fileTxt);
     fclose(fileIndice);
 

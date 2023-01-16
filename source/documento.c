@@ -10,21 +10,21 @@ struct documento {
     Caracteristicas **c;
 };
 
-void AtribuiNomeClasse(Documento *doc, char *nome, char *classe)
+Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe)
 {
     int tamNome = strlen(nome)+1;
     int tamClasse = strlen(classe)+1;
-    printf("nome: %s - classe: %s\n", nome, classe);
-    printf("tam %d - %d\n", tamNome, tamClasse);
 
-    // SEG FAULT AQUI (??????????????????)
+    // Inicializa struct documento e as strings nome e classe
+    doc = (Documento *)malloc(sizeof(Documento));
+
     doc->nome = (char *)malloc(tamNome*sizeof(char));
     doc->classe = (char *)malloc(tamClasse*sizeof(char));
 
-    printf("----------------------------\n");
-
     strncpy(doc->nome, nome, tamNome);
     strncpy(doc->classe, classe, tamClasse);
+
+    return doc;
 }
 
 void ImprimeDoc(Documento *doc) {
@@ -35,4 +35,6 @@ void LiberaDoc(Documento *doc)
 {
     free(doc->nome);
     free(doc->classe);
+
+    free(doc);
 }

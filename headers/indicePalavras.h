@@ -9,4 +9,6 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminho);
 
 void LiberaIndicePalavras(IndicePalavras *p);
 
+void ImprimePalavras(IndicePalavras *p);
+
 #endif

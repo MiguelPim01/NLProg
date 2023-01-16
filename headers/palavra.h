@@ -3,8 +3,10 @@
 
 typedef struct palavra Palavra;
 
-void AtribuiPalavra(Palavra *p, char *palavra);
+Palavra * AtribuiPalavra(Palavra *p, char *palavra);
 
 void LiberaPalavra(Palavra *p);
+
+void ImprimePalavra(Palavra *p);
 
 #endif

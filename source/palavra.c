@@ -12,13 +12,22 @@ struct palavra {
     int qtdAparicoes;
 };
 
-void AtribuiPalavra(Palavra *p, char *palavra)
+Palavra * AtribuiPalavra(Palavra *p, char *palavra)
 {
     int tamPalavra = strlen(palavra)+1;
+
+    p = (Palavra *)malloc(sizeof(Palavra));
 
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
 
     strncpy(p->palavra, palavra, tamPalavra);
+
+    return p;
+}
+
+void ImprimePalavra(Palavra *p)
+{
+    printf("P: %s\n", p->palavra);
 }
 
 void LiberaPalavra(Palavra *p)
