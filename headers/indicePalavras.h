@@ -5,7 +5,7 @@ typedef struct indicePalavras IndicePalavras;
 
 IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras);
 
-IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux);
+IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminhoAux);
 
 int ProcuraRepetida(IndicePalavras *p, char *palavra);
 

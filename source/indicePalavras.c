@@ -23,10 +23,10 @@ IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
     return palavras;
 }
 
-IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
+IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminhoAux)
 {
     FILE *fileDoc;
-    static int mult = 25;
+    static int mult = 25, posicao = 0;
     char caminho[50], palavra[50];
     palavra[0] = '\0';
 
@@ -43,16 +43,23 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, char *caminhoAux)
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {
         fscanf(fileDoc, "%*c");
-
-        if (ProcuraRepetida(p, palavra))
+        // Caso a função ProcuraRepetida retorne -1, é a primeira aparição da palavra, caso contrário a função retornará o índice da palavra repetida
+        if (ProcuraRepetida(p, palavra) == -1)
         {
-            // AtribuiFrequencia()
-        } else {
-            p->arrayPalavras[p->qtdPalavras] = AtribuiPalavra(p->arrayPalavras[p->qtdPalavras], palavra);
-
             p->qtdPalavras++;
-        }
 
+            posicao = p->qtdPalavras-1;
+            
+            p->arrayPalavras[posicao] = InicializaPalavra(p->arrayPalavras[posicao], palavra);
+        } else {
+            posicao = ProcuraRepetida(p, palavra);
+        }
+        AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc);
+            /*
+            SE FOR REPETIDA NO MESMO DOCUMENTO -> ADICIONAR FREQUENCIA
+            SE FOR REPETIDA DE OUTRO DOCUMENTO -> ADICIONAR POSICAO NO ARRAY CARACTERISTICAS
+            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            */
         if (p->qtdPalavras >= mult)
         {
             mult *= 2;
@@ -71,12 +78,11 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
 
     for (i = 0; i < p->qtdPalavras; i++)
     {
-        if (EhRepetida(p->arrayPalavras[i], palavra)) {
-            return 1;
+        if (ComparaPalavras(p->arrayPalavras[i], palavra)) {
+            return i;
         }
     }
-
-    return 0;
+    return -1;
 }
 
 void LiberaIndicePalavras(IndicePalavras *p)

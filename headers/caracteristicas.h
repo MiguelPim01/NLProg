@@ -3,4 +3,10 @@
 
 typedef struct caracteristicas Caracteristicas;
 
+Caracteristicas * AtribuiCaracteristicas(Caracteristicas *crts, int nDoc, int flag);
+
+int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc);
+
+void ImprimeCaracteristicas(Caracteristicas *crts);
+
 #endif

@@ -7,7 +7,7 @@
 
 struct documento {
     char *nome, *classe;
-    Caracteristicas **c;
+    Caracteristicas **crts;
 };
 
 Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe)

@@ -13,6 +13,7 @@ struct indices {
 Indices * CarregaIndices(FILE *f, Indices *i) {
     char caminho[50], classe[10];
     caminho[0] = '\0'; classe[0] = '\0';
+    int contDocs = 0;
 
     // Inicializa struct indices e seus membros IndiceDocs e IndicePalavras
     i = (Indices *)malloc(sizeof(Indices));
@@ -30,9 +31,11 @@ Indices * CarregaIndices(FILE *f, Indices *i) {
         // Entra em cada cada membro da struct indices para fazer as atribuições
         i->docs = AtribuiNomeClasseIndiceDocs(i->docs, caminho, classe);
 
-        i->palavras = AtribuiIndicePalavras(i->palavras, caminho);
+        i->palavras = AtribuiIndicePalavras(i->palavras, contDocs, caminho);
+
+        contDocs++;
     }
-    ImprimeDocs(i->docs);
+    // ImprimeDocs(i->docs);
     ImprimePalavras(i->palavras);
 
     return i;

@@ -3,9 +3,11 @@
 
 typedef struct palavra Palavra;
 
-Palavra * AtribuiPalavra(Palavra *p, char *palavra);
+Palavra * InicializaPalavra(Palavra *p, char *palavra);
 
-int EhRepetida(Palavra *p, char *palavra);
+void AtribuiPalavra(Palavra *p, char *palavra, int nDoc);
+
+int ComparaPalavras(Palavra *p, char *palavra);
 
 void LiberaPalavra(Palavra *p);
 
