@@ -12,19 +12,25 @@ struct palavra {
     int qtdAparicoes;
 };
 
-Palavra * InicializaPalavra(Palavra *p, char *palavra)
+Palavra * AlocaPalavra(char *palavra, int tamPalavra)
 {
-    int mult = 5, tamPalavra = strlen(palavra)+1;
+    Palavra *p = (Palavra *)malloc(sizeof(Palavra));
 
-    // Aloca espaço para palavra e caracteristicas
-    p = (Palavra *)malloc(sizeof(Palavra));
+    int mult = 5;
 
     p->crts = (Caracteristicas **)malloc(mult*sizeof(Caracteristicas *));
-
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
 
-    // Atribui a palavra (string) na struct
-    strncpy(p->palavra, palavra, tamPalavra);
+    return p;
+}
+
+Palavra * InicializaPalavra(Palavra *p, char *palavra)
+{
+    int tamPalavra = strlen(palavra)+1;
+    
+    p = AlocaPalavra(palavra, tamPalavra);
+
+    strncpy(p->palavra, palavra, tamPalavra); // Atribui a palavra (string) na struct
 
     p->qtdAparicoes = 0;
 
@@ -93,7 +99,7 @@ void LiberaPalavra(Palavra *p)
 
     for (i = 0; i < p->qtdAparicoes; i++)
     {
-        free(p->crts[i]);
+        LiberaCaracteristicas(p->crts[i]);
     }  
 
     free(p->crts); 

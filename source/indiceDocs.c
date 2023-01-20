@@ -10,12 +10,19 @@ struct indiceDocs {
     int qtdDocs;
 };
 
-IndiceDocs * InicializaIndiceDocs(IndiceDocs *docs) {
+IndiceDocs * AlocaIndxDocumentos()
+{
+    IndiceDocs *docs = (IndiceDocs *)malloc(sizeof(IndiceDocs));
+
     int mult = 10;
-
-    docs = (IndiceDocs *)malloc(sizeof(IndiceDocs));
-
     docs->arrayDocs = (Documento **)malloc(mult*sizeof(Documento *));
+
+    return docs;
+}
+
+IndiceDocs * InicializaIndiceDocs(IndiceDocs *docs) 
+{
+    docs = AlocaIndxDocumentos();
 
     docs->qtdDocs = 0;
 

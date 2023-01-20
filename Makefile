@@ -1,4 +1,4 @@
-PROJ_NAME=indice
+PROJ_NAME=prog1
 
 CC=gcc
 CFLAGS=-lm -g -Wall

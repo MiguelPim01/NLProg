@@ -10,13 +10,19 @@ struct indicePalavras {
     int qtdPalavras;
 };
 
+IndicePalavras * AlocaIndxPalavras()
+{
+    IndicePalavras *palavras = (IndicePalavras *)malloc(sizeof(IndicePalavras));
+
+    int mult = 25;
+    palavras->arrayPalavras = (Palavra **)malloc(mult*sizeof(Palavra *));
+
+    return palavras;
+}
+
 IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
 {
-    int mult = 25;
-    // Aloca espaço para a struct IndicePalavras e array de palavra dentro dela
-    palavras = (IndicePalavras *)malloc(sizeof(IndicePalavras));
-
-    palavras->arrayPalavras = (Palavra **)malloc(mult*sizeof(Palavra *));
+    palavras = AlocaIndxPalavras();
 
     palavras->qtdPalavras = 0;
 
@@ -43,6 +49,7 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {
         fscanf(fileDoc, "%*c");
+
         // Caso a função ProcuraRepetida retorne -1, é a primeira aparição da palavra, caso contrário a função retornará o índice da palavra repetida
         if (ProcuraRepetida(p, palavra) == -1)
         {
@@ -51,10 +58,13 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
             posicao = p->qtdPalavras-1;
             
             p->arrayPalavras[posicao] = InicializaPalavra(p->arrayPalavras[posicao], palavra);
-        } else {
-            posicao = ProcuraRepetida(p, palavra);
+        } 
+        else 
+        {
+            posicao = ProcuraRepetida(p, palavra); // ADICIONAR FUNCAO A UMA VARIAVEL POIS FOI UTILIZADA DUAS VEZES
         }
-        AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc);
+
+        AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc); // FAZER UM MELHOR USO DO IF DE CIMA TIRANDO ESSA FUNCAO
             /*
             SE FOR REPETIDA NO MESMO DOCUMENTO -> ADICIONAR FREQUENCIA
             SE FOR REPETIDA DE OUTRO DOCUMENTO -> ADICIONAR POSICAO NO ARRAY CARACTERISTICAS
@@ -78,7 +88,8 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
 
     for (i = 0; i < p->qtdPalavras; i++)
     {
-        if (ComparaPalavras(p->arrayPalavras[i], palavra)) {
+        if (ComparaPalavras(p->arrayPalavras[i], palavra)) 
+        {
             return i;
         }
     }

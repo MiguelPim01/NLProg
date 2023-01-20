@@ -10,16 +10,22 @@ struct documento {
     Caracteristicas **crts;
 };
 
+Documento * AlocaDocumento(int tamNome, int tamClasse)
+{
+    Documento *doc = (Documento *)malloc(sizeof(Documento));
+
+    doc->nome = (char *)malloc(tamNome*sizeof(char));
+    doc->classe = (char *)malloc(tamClasse*sizeof(char));
+
+    return doc;
+}
+
 Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe)
 {
     int tamNome = strlen(nome)+1;
     int tamClasse = strlen(classe)+1;
 
-    // Inicializa struct documento e as strings nome e classe
-    doc = (Documento *)malloc(sizeof(Documento));
-
-    doc->nome = (char *)malloc(tamNome*sizeof(char));
-    doc->classe = (char *)malloc(tamClasse*sizeof(char));
+    doc = AlocaDocumento(tamNome, tamClasse);
 
     strncpy(doc->nome, nome, tamNome);
     strncpy(doc->classe, classe, tamClasse);
