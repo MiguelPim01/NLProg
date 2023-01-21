@@ -25,25 +25,11 @@ Caracteristicas * InicializaCaracteristicas(Caracteristicas * crts, int nDoc)
     return crts;
 }
 
-Caracteristicas * AtribuiCaracteristicas(Caracteristicas *crts, int nDoc, int flag)
-{
-    if (flag)
-    {
-        crts->frequencia++;
-    } 
-    else 
-    {
-        crts = AlocaCaracteristicas();
-        crts->posicao = nDoc;
-        crts->frequencia = 1;
-    }
-
-    return crts;
-}
-
 Caracteristicas * SomaNaFrequencia(Caracteristicas *crts)
 {
     crts->frequencia++;
+
+    return crts;
 }
 
 int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc)
