@@ -1,0 +1,1 @@
+material aumenta memoria em 250 vezes
