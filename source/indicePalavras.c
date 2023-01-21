@@ -29,14 +29,13 @@ IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
     return palavras;
 }
 
-IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminhoAux)
+IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminho)
 {
     FILE *fileDoc;
     static int mult = 25, posicao = 0;
-    char caminho[50], palavra[50];
+    char palavra[50];
     palavra[0] = '\0';
 
-    sprintf(caminho, "data/%s", caminhoAux);
     fileDoc = fopen(caminho, "r");
 
     if (fileDoc == NULL)
@@ -45,7 +44,7 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
         exit(1);
     }
 
-    int rtrnProcura=0;
+    int rtrnProcura = 0;
 
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {

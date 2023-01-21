@@ -37,7 +37,7 @@ IndiceDocs * AtribuiNomeClasseIndiceDocs(IndiceDocs *docs, char *caminho, char *
     char nome[50];
     nome[0] = '\0';
 
-    sscanf(caminho, "%*[^/]/%s", nome);
+    sscanf(caminho, "%*[/]%s", nome);
 
     docs->arrayDocs[docs->qtdDocs] = AtribuiNomeClasse(docs->arrayDocs[docs->qtdDocs], nome, classe);
     

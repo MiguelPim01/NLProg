@@ -9,7 +9,8 @@ int main(int argc, char *argv[])
     FILE *fileTxt, *fileIndice;
     Indices *indices = NULL;
 
-    char caminho[100];
+    char caminho[300];
+    char caminhoTxt[310];
 
     if (argc <= 2)
     {
@@ -18,18 +19,23 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // Abrindo o arquivo dos nomes dos arquivos (train.txt)
-    sprintf(caminho, "%s", argv[1]);
-    fileTxt = fopen(caminho, "r");
+    // Obtem caminho até a pasta train
+    sscanf(argv[1], "%[^.]", caminho);
+
+    // Obtem caminho até o arquivo train.txt
+    sprintf(caminhoTxt, "%s.txt", caminho);
+
+    fileTxt = fopen(caminhoTxt, "r");
 
     if (fileTxt == NULL)
     {
-        printf("ERRO: Não foi possível abrir o arquivo com o caminho %s.\n", caminho);
+        printf("ERRO: Não foi possível abrir o arquivo com o caminho %s.\n", caminhoTxt);
         return 1;
     }
 
     // PASSO 1 (Ler os arquivos de noticias e criar os vetores de palavra e documento):
-    indices = CarregaIndices(fileTxt, indices);
+
+    indices = CarregaIndices(fileTxt, indices, caminho);
 
     // Arbindo o arquivo de saida do programa (indice)
     sprintf(caminho, "%s", argv[2]);

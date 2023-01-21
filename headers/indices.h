@@ -3,7 +3,7 @@
 
 typedef struct indices Indices;
 
-Indices * CarregaIndices(FILE *f, Indices *i);
+Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux);
 
 void LiberaIndices(Indices *i);
 
