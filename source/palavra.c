@@ -32,23 +32,23 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
 
     strncpy(p->palavra, palavra, tamPalavra); // Atribui a palavra (string) na struct
 
-    p->qtdAparicoes = 0;
+    p->qtdAparicoes = 1;
 
     return p;
 }
 
 Palavra * AdicionaFrequencia(Palavra *p, int nDoc)
 {
-    if (VerificaSeAddFrequencia(p->crts[p->qtdAparicoes], nDoc))
+    if (VerificaSeAddFrequencia(p->crts[p->qtdAparicoes-1], nDoc))
     {
-        p->crts[p->qtdAparicoes] = SomaNaFrequencia(p->crts[p->qtdAparicoes]);
+        p->crts[p->qtdAparicoes-1] = SomaNaFrequencia(p->crts[p->qtdAparicoes-1]);
     }
     else 
     {
         p->qtdAparicoes++;
         
-        p->crts = (Caracteristicas **)realloc(p->crts, (p->qtdAparicoes+1)*sizeof(Caracteristicas *));
-        p->crts[p->qtdAparicoes] = InicializaCaracteristicas(p->crts[p->qtdAparicoes], nDoc);
+        p->crts = (Caracteristicas **)realloc(p->crts, p->qtdAparicoes*sizeof(Caracteristicas *));
+        p->crts[p->qtdAparicoes-1] = InicializaCaracteristicas(p->crts[p->qtdAparicoes-1], nDoc);
     }
     
     return p;
