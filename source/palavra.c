@@ -16,19 +16,19 @@ Palavra * AlocaPalavra(char *palavra, int tamPalavra)
 {
     Palavra *p = (Palavra *)malloc(sizeof(Palavra));
 
-    int mult = 5;
-
-    p->crts = (Caracteristicas **)malloc(mult*sizeof(Caracteristicas *));
+    p->crts = (Caracteristicas **)malloc(sizeof(Caracteristicas *));
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
 
     return p;
 }
 
-Palavra * InicializaPalavra(Palavra *p, char *palavra)
+Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
 {
     int tamPalavra = strlen(palavra)+1;
     
     p = AlocaPalavra(palavra, tamPalavra);
+
+    p->crts[0] = InicializaCaracteristicas(p->crts[0], nDoc);
 
     strncpy(p->palavra, palavra, tamPalavra); // Atribui a palavra (string) na struct
 
@@ -37,37 +37,21 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra)
     return p;
 }
 
-void AtribuiPalavra(Palavra *p, char *palavra, int nDoc)
+Palavra * AdicionaFrequencia(Palavra *p, int nDoc)
 {
-    int i, flagFrequencia = 0;
-    static int mult = 5;
-
-    // Caso seja a primeira aparição da palavra, atribuir na posicao 0 do vetor caracteristicas
-    if (!p->qtdAparicoes)
+    if (VerificaSeAddFrequencia(p->crts[p->qtdAparicoes], nDoc))
     {
-        p->crts[0] = AtribuiCaracteristicas(p->crts[0], nDoc, flagFrequencia);p->qtdAparicoes++;
-        return;
+        p->crts[p->qtdAparicoes] = SomaNaFrequencia(p->crts[p->qtdAparicoes]);
     }
-
-    for (i = 0; i < p->qtdAparicoes; i++)
+    else 
     {
-        if (VerificaSeAddFrequencia(p->crts[i], nDoc)) {
-            flagFrequencia = 1;
-            break;
-        }
+        p->qtdAparicoes++;
+        
+        p->crts = (Caracteristicas **)realloc(p->crts, (p->qtdAparicoes+1)*sizeof(Caracteristicas *));
+        p->crts[p->qtdAparicoes] = InicializaCaracteristicas(p->crts[p->qtdAparicoes], nDoc);
     }
-
-    // Adiciona uma apariçao (tamanho do vetor caracteristicas) caso não seja apenas a frequencia que esteja aumentando
-    if (!flagFrequencia) p->qtdAparicoes++;
-
-    // Aloca mais espaço no vetor de caracteristicas caso precise
-    if (p->qtdAparicoes >= mult)
-    {
-        mult *= 2;
-        p->crts = (Caracteristicas **)realloc(p->crts, mult*sizeof(Caracteristicas *));
-    }
-
-    p->crts[i] = AtribuiCaracteristicas(p->crts[i], nDoc, flagFrequencia);
+    
+    return p;
 }
 
 int ComparaPalavras(Palavra *p, char *palavra)

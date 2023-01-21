@@ -37,7 +37,6 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
     palavra[0] = '\0';
 
     sprintf(caminho, "data/%s", caminhoAux);
-
     fileDoc = fopen(caminho, "r");
 
     if (fileDoc == NULL)
@@ -46,30 +45,33 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
         exit(1);
     }
 
+    int rtrnProcura=0;
+
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {
         fscanf(fileDoc, "%*c");
 
         // Caso a função ProcuraRepetida retorne -1, é a primeira aparição da palavra, caso contrário a função retornará o índice da palavra repetida
-        if (ProcuraRepetida(p, palavra) == -1)
+        rtrnProcura = ProcuraRepetida(p, palavra);
+
+        if (rtrnProcura == -1)
         {
             p->qtdPalavras++;
 
             posicao = p->qtdPalavras-1;
             
-            p->arrayPalavras[posicao] = InicializaPalavra(p->arrayPalavras[posicao], palavra);
+            p->arrayPalavras[posicao] = InicializaPalavra(p->arrayPalavras[posicao], palavra, nDoc);
         } 
         else 
         {
-            posicao = ProcuraRepetida(p, palavra); // ADICIONAR FUNCAO A UMA VARIAVEL POIS FOI UTILIZADA DUAS VEZES
+            posicao = rtrnProcura;
+
+            p->arrayPalavras[posicao] = AdicionaFrequencia(p->arrayPalavras[posicao], nDoc);
         }
 
-        AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc); // FAZER UM MELHOR USO DO IF DE CIMA TIRANDO ESSA FUNCAO
-            /*
-            SE FOR REPETIDA NO MESMO DOCUMENTO -> ADICIONAR FREQUENCIA
-            SE FOR REPETIDA DE OUTRO DOCUMENTO -> ADICIONAR POSICAO NO ARRAY CARACTERISTICAS
-            aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-            */
+        // AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc);
+        
+
         if (p->qtdPalavras >= mult)
         {
             mult *= 2;
@@ -104,6 +106,7 @@ void LiberaIndicePalavras(IndicePalavras *p)
     {
         LiberaPalavra(p->arrayPalavras[i]);
     }
+    
     free(p->arrayPalavras);
     free(p);
 }

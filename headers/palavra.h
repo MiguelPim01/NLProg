@@ -3,7 +3,11 @@
 
 typedef struct palavra Palavra;
 
-Palavra * InicializaPalavra(Palavra *p, char *palavra);
+Palavra * AlocaPalavra(char *palavra, int tamPalavra);
+
+Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc);
+
+Palavra * AdicionaFrequencia(Palavra *p, int nDoc);
 
 void AtribuiPalavra(Palavra *p, char *palavra, int nDoc);
 

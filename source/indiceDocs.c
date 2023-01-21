@@ -71,6 +71,7 @@ void LiberaIndiceDocs(IndiceDocs *docs)
     {
         LiberaDoc(docs->arrayDocs[i]);
     }
+    
     free(docs->arrayDocs);
     free(docs);
 }

@@ -16,6 +16,15 @@ Caracteristicas * AlocaCaracteristicas()
     return crts;
 }
 
+Caracteristicas * InicializaCaracteristicas(Caracteristicas * crts, int nDoc)
+{
+    crts = AlocaCaracteristicas();
+    crts->posicao = nDoc;
+    crts->frequencia = 1;
+
+    return crts;
+}
+
 Caracteristicas * AtribuiCaracteristicas(Caracteristicas *crts, int nDoc, int flag)
 {
     if (flag)
@@ -32,9 +41,17 @@ Caracteristicas * AtribuiCaracteristicas(Caracteristicas *crts, int nDoc, int fl
     return crts;
 }
 
+Caracteristicas * SomaNaFrequencia(Caracteristicas *crts)
+{
+    crts->frequencia++;
+}
+
 int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc)
 {
-    if (crts->posicao == nDoc) return 1;
+    if (crts->posicao == nDoc) 
+    {
+        return 1;
+    }
     
     return 0;
 }
