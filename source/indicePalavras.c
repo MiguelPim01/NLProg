@@ -48,6 +48,7 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
 
     while (fscanf(fileDoc, "%s", palavra) == 1)
     {
+        fscanf(fileDoc, "%*[^ ]");
         fscanf(fileDoc, "%*c");
 
         // Caso a função ProcuraRepetida retorne -1, é a primeira aparição da palavra, caso contrário a função retornará o índice da palavra repetida
@@ -67,9 +68,6 @@ IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminh
 
             p->arrayPalavras[posicao] = AdicionaFrequencia(p->arrayPalavras[posicao], nDoc);
         }
-
-        // AtribuiPalavra(p->arrayPalavras[posicao], palavra, nDoc);
-        
 
         if (p->qtdPalavras >= mult)
         {
@@ -119,4 +117,9 @@ void ImprimePalavras(IndicePalavras *p)
         printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
     }
+}
+
+void OrdenaIndicePalavras(IndicePalavras *p)
+{   
+    qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
 }

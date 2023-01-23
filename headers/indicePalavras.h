@@ -13,4 +13,6 @@ void LiberaIndicePalavras(IndicePalavras *p);
 
 void ImprimePalavras(IndicePalavras *p);
 
+void OrdenaIndicePalavras(IndicePalavras *p);
+
 #endif

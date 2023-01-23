@@ -90,3 +90,21 @@ void LiberaPalavra(Palavra *p)
     free(p->palavra);
     free(p);
 }
+
+int PelaPalavra(const void *a, const void *b)
+{
+    Palavra *p1 = (Palavra *)a;
+    Palavra *p2 = (Palavra *)b;
+
+    return strcmp(p1->palavra, p2->palavra);
+}
+
+size_t RetornaTamStructPalavra()
+{
+    return sizeof(Palavra);
+}
+
+char * RetornaPalavra(Palavra *p)
+{
+    return p->palavra;
+}

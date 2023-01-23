@@ -17,4 +17,10 @@ void LiberaPalavra(Palavra *p);
 
 void ImprimePalavra(Palavra *p);
 
+int PelaPalavra(const void *a, const void *b);
+
+size_t RetornaTamStructPalavra();
+
+char * RetornaPalavra(Palavra *p);
+
 #endif

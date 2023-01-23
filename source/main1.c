@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 
     indices = CarregaIndices(fileTxt, indices, caminho);
 
-    // Arbindo o arquivo de saida do programa (indice)
+    // Abrindo o arquivo de saida do programa (indice)
     sprintf(caminho, "%s", argv[2]);
     fileIndice = fopen(caminho, "wb");
 

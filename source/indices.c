@@ -49,8 +49,11 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
 
         contDocs++;
     }
+
+    OrdenaIndicePalavras(i->palavras);
+
     // ImprimeDocs(i->docs);
-    // ImprimePalavras(i->palavras);
+    ImprimePalavras(i->palavras);
 
     return i;
 }
