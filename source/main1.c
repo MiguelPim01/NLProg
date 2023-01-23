@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "../headers/indiceDocs.h"
 #include "../headers/indicePalavras.h"
@@ -11,6 +12,9 @@ int main(int argc, char *argv[])
 
     char caminho[300];
     char caminhoTxt[310];
+    caminho[0]='\0'; caminhoTxt[0]='\0';
+
+    int tamArg=0;
 
     if (argc <= 2)
     {
@@ -20,7 +24,8 @@ int main(int argc, char *argv[])
     }
 
     // Obtem caminho até a pasta train
-    sscanf(argv[1], "%[^.]", caminho);
+    tamArg = strlen(argv[1])-4;
+    strncpy(caminho, argv[1], tamArg);
 
     // Obtem caminho até o arquivo train.txt
     sprintf(caminhoTxt, "%s.txt", caminho);
