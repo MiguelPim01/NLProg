@@ -4,6 +4,7 @@
 
 #include "../headers/indiceDocs.h"
 #include "../headers/documento.h"
+#include "../headers/caracteristicas.h"
 
 struct indiceDocs {
     Documento **arrayDocs;
@@ -66,6 +67,11 @@ void ImprimeDocs(IndiceDocs *docs)
         printf("doc %d: ", i);
         ImprimeDoc(docs->arrayDocs[i]);
     }
+}
+
+void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra, int freqPalavra, double tf_idf)
+{
+    AtribuiCaracDoc(docs->arrayDocs[posDocumento], posPalavra, freqPalavra, tf_idf);
 }
 
 void LiberaIndiceDocs(IndiceDocs *docs)

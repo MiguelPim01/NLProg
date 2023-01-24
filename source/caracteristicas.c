@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "../headers/caracteristicas.h"
+#include "../headers/indiceDocs.h"
 
 struct caracteristicas {
     int posicao, frequencia;
@@ -17,11 +18,12 @@ Caracteristicas * AlocaCaracteristicas()
     return crts;
 }
 
-Caracteristicas * InicializaCaracteristicas(Caracteristicas * crts, int nDoc)
+Caracteristicas * InicializaCaracteristicas(Caracteristicas * crts, int pos, int freq, double tf_idf)
 {
     crts = AlocaCaracteristicas();
-    crts->posicao = nDoc;
-    crts->frequencia = 1;
+    crts->posicao = pos;
+    crts->frequencia = freq;
+    crts->tf_idf = tf_idf;
 
     return crts;
 }
@@ -61,4 +63,9 @@ void ImprimeCaracteristicas(Caracteristicas *crts)
 void LiberaCaracteristicas(Caracteristicas *crts)
 {
     free(crts);
+}
+
+void FinalizaCaracDocumentos_carac(Caracteristicas *crts, IndiceDocs *docs, int posPalavra)
+{
+    AchaDocParaAtribuirCarac(docs, crts->posicao, posPalavra, crts->frequencia, crts->tf_idf);
 }

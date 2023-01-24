@@ -6,6 +6,9 @@
 #include "../headers/caracteristicas.h"
 #include "../headers/indiceDocs.h"
 
+#define FREQ_INICIAL 1
+#define TF_IDF_PADRAO 0
+
 struct palavra {
     char *palavra;
     Caracteristicas **crts;
@@ -28,7 +31,7 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
     
     p = AlocaPalavra(palavra, tamPalavra);
 
-    p->crts[0] = InicializaCaracteristicas(p->crts[0], nDoc);
+    p->crts[0] = InicializaCaracteristicas(p->crts[0], nDoc, FREQ_INICIAL, TF_IDF_PADRAO);
 
     strncpy(p->palavra, palavra, tamPalavra); // Atribui a palavra (string) na struct
 
@@ -48,7 +51,7 @@ Palavra * AdicionaFrequencia(Palavra *p, int nDoc)
         p->qtdAparicoes++;
         
         p->crts = (Caracteristicas **)realloc(p->crts, p->qtdAparicoes*sizeof(Caracteristicas *));
-        p->crts[p->qtdAparicoes-1] = InicializaCaracteristicas(p->crts[p->qtdAparicoes-1], nDoc);
+        p->crts[p->qtdAparicoes-1] = InicializaCaracteristicas(p->crts[p->qtdAparicoes-1], nDoc, FREQ_INICIAL, TF_IDF_PADRAO);
     }
     
     return p;
@@ -109,12 +112,12 @@ void AtribuiTf_idfPalavra(Palavra *p, int n)
     }
 }
 
-size_t RetornaTamStructPalavra()
+void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalavra)
 {
-    return sizeof(Palavra);
-}
+    int i;
 
-char * RetornaPalavra(Palavra *p)
-{
-    return p->palavra;
+    for (i = 0; i < p->qtdAparicoes; i++)
+    {
+        FinalizaCaracDocumentos_carac(p->crts[i], docs, posPalavra);
+    }
 }

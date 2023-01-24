@@ -4,6 +4,7 @@
 
 #include "../headers/indicePalavras.h"
 #include "../headers/palavra.h"
+#include "../headers/indiceDocs.h"
 
 struct indicePalavras {
     Palavra **arrayPalavras;
@@ -95,7 +96,8 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
     return -1;
 }
 
-void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs) {
+void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs)
+{
     int i;
 
     for (i = 0; i < p->qtdPalavras; i++)
@@ -131,4 +133,14 @@ void ImprimePalavras(IndicePalavras *p)
 void OrdenaIndicePalavras(IndicePalavras *p)
 {   
     qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
+}
+
+void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
+{
+    int i;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        FinalizaCaracDocumentos_palavras(p->arrayPalavras[i], docs, i);
+    }
 }

@@ -11,6 +11,8 @@ int ObtemQtdDocs(IndiceDocs *docs);
 
 void ImprimeDocs(IndiceDocs *docs);
 
+void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra, int freqPalavra, double tf_idf);
+
 void LiberaIndiceDocs(IndiceDocs *docs);
 
 #endif

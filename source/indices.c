@@ -49,12 +49,15 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
 
         contDocs++;
     }
+
     AtribuiTf_idfIdxPalavras(i->palavras, ObtemQtdDocs(i->docs));
 
     OrdenaIndicePalavras(i->palavras);
 
-    // ImprimeDocs(i->docs);
-    ImprimePalavras(i->palavras);
+    FinalizaCaracDocumentos_indxPalavras(i->palavras, i->docs);
+
+    ImprimeDocs(i->docs);
+    // ImprimePalavras(i->palavras);
 
     return i;
 }

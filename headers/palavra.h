@@ -1,6 +1,8 @@
 #ifndef PALAVRA_H
 #define PALAVRA_H
 
+#include "../headers/indiceDocs.h"
+
 typedef struct palavra Palavra;
 
 Palavra * AlocaPalavra(char *palavra, int tamPalavra);
@@ -19,10 +21,8 @@ void ImprimePalavra(Palavra *p);
 
 int PelaPalavra(const void *a, const void *b);
 
-size_t RetornaTamStructPalavra();
-
-char * RetornaPalavra(Palavra *p);
-
 void AtribuiTf_idfPalavra(Palavra *p, int n);
+
+void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalavra);
 
 #endif
