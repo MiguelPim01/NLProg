@@ -99,6 +99,16 @@ int PelaPalavra(const void *a, const void *b)
     return strcmp(p1->palavra, p2->palavra);
 }
 
+void AtribuiTf_idfPalavra(Palavra *p, int n)
+{
+    int i;
+
+    for (i = 0; i < p->qtdAparicoes; i++)
+    {
+        CalculaTf_idf(p->crts[i], p->qtdAparicoes, n);
+    }
+}
+
 size_t RetornaTamStructPalavra()
 {
     return sizeof(Palavra);

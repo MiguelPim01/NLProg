@@ -13,6 +13,8 @@ Caracteristicas * SomaNaFrequencia(Caracteristicas *crts);
 
 int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc);
 
+void CalculaTf_idf(Caracteristicas *crts, int df, int n);
+
 void ImprimeCaracteristicas(Caracteristicas *crts);
 
 void LiberaCaracteristicas(Caracteristicas *crts);

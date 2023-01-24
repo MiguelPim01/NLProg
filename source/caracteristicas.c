@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "../headers/caracteristicas.h"
 
 struct caracteristicas {
     int posicao, frequencia;
-    double tfidf;
+    double tf_idf;
 };
 
 Caracteristicas * AlocaCaracteristicas()
@@ -42,9 +43,19 @@ int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc)
     return 0;
 }
 
+void CalculaTf_idf(Caracteristicas *crts, int df, int n)
+{
+    double tf, idf;
+
+    tf = crts->frequencia;
+    idf = log((1+n)/(1+df))+1;
+
+    crts->tf_idf = tf*idf;
+}
+
 void ImprimeCaracteristicas(Caracteristicas *crts)
 {
-    printf("pos: %d - freq: %d\n", crts->posicao, crts->frequencia);
+    printf("pos: %d - freq: %d - tf_idf: %.2lf\n", crts->posicao, crts->frequencia, crts->tf_idf);
 }
 
 void LiberaCaracteristicas(Caracteristicas *crts)

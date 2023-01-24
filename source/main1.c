@@ -12,9 +12,9 @@ int main(int argc, char *argv[])
 
     char caminho[300];
     char caminhoTxt[310];
-    caminho[0]='\0'; caminhoTxt[0]='\0';
+    caminho[0] = '\0'; caminhoTxt[0] = '\0';
 
-    int tamArg=0;
+    int tamArg = 0;
 
     if (argc <= 2)
     {

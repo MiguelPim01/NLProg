@@ -23,4 +23,6 @@ size_t RetornaTamStructPalavra();
 
 char * RetornaPalavra(Palavra *p);
 
+void AtribuiTf_idfPalavra(Palavra *p, int n);
+
 #endif

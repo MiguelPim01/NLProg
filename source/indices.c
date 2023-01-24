@@ -49,6 +49,7 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
 
         contDocs++;
     }
+    AtribuiTf_idfIdxPalavras(i->palavras, ObtemQtdDocs(i->docs));
 
     OrdenaIndicePalavras(i->palavras);
 

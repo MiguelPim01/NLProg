@@ -52,6 +52,11 @@ IndiceDocs * AtribuiNomeClasseIndiceDocs(IndiceDocs *docs, char *caminho, char *
     return docs;
 }
 
+int ObtemQtdDocs(IndiceDocs *docs)
+{
+    return docs->qtdDocs;
+}
+
 void ImprimeDocs(IndiceDocs *docs)
 {
     int i;

@@ -10,7 +10,7 @@ struct indicePalavras {
     int qtdPalavras;
 };
 
-IndicePalavras * AlocaIndxPalavras()
+IndicePalavras * AlocaIdxPalavras()
 {
     IndicePalavras *palavras = (IndicePalavras *)malloc(sizeof(IndicePalavras));
 
@@ -22,7 +22,7 @@ IndicePalavras * AlocaIndxPalavras()
 
 IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
 {
-    palavras = AlocaIndxPalavras();
+    palavras = AlocaIdxPalavras();
 
     palavras->qtdPalavras = 0;
 
@@ -93,6 +93,15 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
         }
     }
     return -1;
+}
+
+void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs) {
+    int i;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        AtribuiTf_idfPalavra(p->arrayPalavras[i], qtdDocs);
+    }
 }
 
 void LiberaIndicePalavras(IndicePalavras *p)
