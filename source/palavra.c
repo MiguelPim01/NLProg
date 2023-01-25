@@ -67,33 +67,6 @@ int ComparaPalavras(Palavra *p, char *palavra)
     return 0;
 }
 
-void ImprimePalavra(Palavra *p)
-{
-    int i;
-
-    printf("%s\n", p->palavra);
-
-    for (i = 0; i < p->qtdAparicoes; i++)
-    {
-        ImprimeCaracteristicas(p->crts[i]);
-    }
-
-}
-
-void LiberaPalavra(Palavra *p)
-{
-    int i;
-
-    for (i = 0; i < p->qtdAparicoes; i++)
-    {
-        LiberaCaracteristicas(p->crts[i]);
-    }  
-
-    free(p->crts); 
-    free(p->palavra);
-    free(p);
-}
-
 int PelaPalavra(const void *a, const void *b)
 {
     Palavra *p1 = (Palavra *)a;
@@ -120,4 +93,43 @@ void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalav
     {
         FinalizaCaracDocumentos_carac(p->crts[i], docs, posPalavra);
     }
+}
+
+void SalvaPalavraBin(Palavra *p, FILE *f)
+{
+    fwrite(p->palavra, sizeof(char), strlen(p->palavra), f);
+
+    for (int i; i < p->qtdAparicoes; i++)
+    {
+        SalvaCaracteristicasBin(p->crts[i], f);
+    }
+
+    fwrite("\n", sizeof(char), 1, f);
+}
+
+void ImprimePalavra(Palavra *p)
+{
+    int i;
+
+    printf("%s\n", p->palavra);
+
+    for (i = 0; i < p->qtdAparicoes; i++)
+    {
+        ImprimeCaracteristicas(p->crts[i]);
+    }
+
+}
+
+void LiberaPalavra(Palavra *p)
+{
+    int i;
+
+    for (i = 0; i < p->qtdAparicoes; i++)
+    {
+        LiberaCaracteristicas(p->crts[i]);
+    }  
+
+    free(p->crts); 
+    free(p->palavra);
+    free(p);
 }

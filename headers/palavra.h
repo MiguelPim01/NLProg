@@ -15,14 +15,16 @@ void AtribuiPalavra(Palavra *p, char *palavra, int nDoc);
 
 int ComparaPalavras(Palavra *p, char *palavra);
 
-void LiberaPalavra(Palavra *p);
-
-void ImprimePalavra(Palavra *p);
-
 int PelaPalavra(const void *a, const void *b);
 
 void AtribuiTf_idfPalavra(Palavra *p, int n);
 
 void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalavra);
+
+void SalvaPalavraBin(Palavra *p, FILE *f);
+
+void LiberaPalavra(Palavra *p);
+
+void ImprimePalavra(Palavra *p);
 
 #endif

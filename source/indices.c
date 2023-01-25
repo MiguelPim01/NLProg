@@ -56,10 +56,16 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
 
     FinalizaCaracDocumentos_indxPalavras(i->palavras, i->docs);
 
-    ImprimeDocs(i->docs);
-    // ImprimePalavras(i->palavras);
+    // ImprimeDocs(i->docs);
+    ImprimePalavras(i->palavras);
 
     return i;
+}
+
+void SalvaIndices(Indices *i, FILE *f)
+{
+    SalvaIndiceDocsBin(i->docs, f);
+    SalvaIndicePalavrasBin(i->palavras, f);
 }
 
 void LiberaIndices(Indices *i)

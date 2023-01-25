@@ -44,6 +44,20 @@ void AtribuiCaracDoc(Documento *doc, int posPalavra, int freqPalavra, double tf_
     doc->crts[doc->qtdPalavras-1] = InicializaCaracteristicas(doc->crts[doc->qtdPalavras], posPalavra, freqPalavra, tf_idf);
 }
 
+void SalvaDocBin(Documento *doc, FILE *f)
+{
+    fwrite(doc->nome, sizeof(char), strlen(doc->nome), f);
+
+    fwrite(doc->classe, sizeof(char), strlen(doc->classe), f);
+
+    for (int i = 0; i < doc->qtdPalavras; i++)
+    {
+        SalvaCaracteristicasBin(doc->crts[i], f);
+    }
+
+    fwrite("\n", sizeof(char), 1, f);
+}
+
 void ImprimeDoc(Documento *doc) 
 {
     int i;
@@ -52,8 +66,6 @@ void ImprimeDoc(Documento *doc)
     {
         ImprimeCaracteristicas(doc->crts[i]);
     }
-    
-    // printf("nome: %s - classe: %s\n", doc->nome, doc->classe);
 }
 
 void LiberaDoc(Documento *doc)

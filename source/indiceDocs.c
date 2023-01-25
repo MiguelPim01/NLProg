@@ -74,6 +74,16 @@ void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra
     AtribuiCaracDoc(docs->arrayDocs[posDocumento], posPalavra, freqPalavra, tf_idf);
 }
 
+void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f)
+{
+    fwrite(&docs->qtdDocs, sizeof(int), 1, f);
+    
+    for (int i = 0; i < docs->qtdDocs; i++)
+    {
+        SalvaDocBin(docs->arrayDocs[i], f);
+    }
+}
+
 void LiberaIndiceDocs(IndiceDocs *docs)
 {
     int i;

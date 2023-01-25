@@ -106,6 +106,31 @@ void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs)
     }
 }
 
+void OrdenaIndicePalavras(IndicePalavras *p)
+{   
+    qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
+}
+
+void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
+{
+    int i;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        FinalizaCaracDocumentos_palavras(p->arrayPalavras[i], docs, i);
+    }
+}
+
+void SalvaIndicePalavrasBin(IndicePalavras *p, FILE *f)
+{
+    fwrite(&p->qtdPalavras, sizeof(int), 1, f);
+
+    for (int i; i < p->qtdPalavras; i++)
+    {
+        SalvaPalavraBin(p->arrayPalavras[i], f);
+    }
+}
+
 void LiberaIndicePalavras(IndicePalavras *p)
 {
     int i;
@@ -127,20 +152,5 @@ void ImprimePalavras(IndicePalavras *p)
     {
         printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
-    }
-}
-
-void OrdenaIndicePalavras(IndicePalavras *p)
-{   
-    qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
-}
-
-void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
-{
-    int i;
-
-    for (i = 0; i < p->qtdPalavras; i++)
-    {
-        FinalizaCaracDocumentos_palavras(p->arrayPalavras[i], docs, i);
     }
 }

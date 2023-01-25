@@ -55,6 +55,15 @@ void CalculaTf_idf(Caracteristicas *crts, int df, int n)
     crts->tf_idf = tf*idf;
 }
 
+void SalvaCaracteristicasBin(Caracteristicas *crts, FILE *f)
+{
+    fwrite(&crts->posicao, sizeof(int), 1, f);
+
+    fwrite(&crts->frequencia, sizeof(int), 1, f);
+
+    fwrite(&crts->tf_idf, sizeof(double), 1, f);
+}
+
 void ImprimeCaracteristicas(Caracteristicas *crts)
 {
     printf("pos: %d - freq: %d - tf_idf: %.2lf\n", crts->posicao, crts->frequencia, crts->tf_idf);

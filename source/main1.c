@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *fileTxt, *fileIndice;
+    FILE *fileTxt, *fileIndices;
     Indices *indices = NULL;
 
     char caminho[300];
@@ -44,20 +44,21 @@ int main(int argc, char *argv[])
 
     // Abrindo o arquivo de saida do programa (indice)
     sprintf(caminho, "%s", argv[2]);
-    fileIndice = fopen(caminho, "wb");
+    fileIndices = fopen(caminho, "wb");
 
-    if (fileIndice == NULL)
+    if (fileIndices == NULL)
     {
         printf("ERRO: Não foi possível abrir o arquivo com o caminho %s.\n", caminho);
         return 1;
     }
 
     // PASSO 2 (Salvar vetores em um arquivo binario):
+    SalvaIndices(indices, fileIndices);
 
     LiberaIndices(indices);
 
     fclose(fileTxt);
-    fclose(fileIndice);
+    fclose(fileIndices);
 
     return 0;
 }

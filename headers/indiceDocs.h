@@ -13,6 +13,8 @@ void ImprimeDocs(IndiceDocs *docs);
 
 void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra, int freqPalavra, double tf_idf);
 
+void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f);
+
 void LiberaIndiceDocs(IndiceDocs *docs);
 
 #endif

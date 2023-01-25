@@ -17,6 +17,8 @@ void LiberaIndicePalavras(IndicePalavras *p);
 
 void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs);
 
+void SalvaIndicePalavrasBin(IndicePalavras *p, FILE *f);
+
 void ImprimePalavras(IndicePalavras *p);
 
 void OrdenaIndicePalavras(IndicePalavras *p);
