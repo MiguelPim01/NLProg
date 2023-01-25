@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../headers/indiceDocs.h"
-#include "../headers/indicePalavras.h"
-#include "../headers/indices.h"
+#include "headers/indiceDocs.h"
+#include "headers/indicePalavras.h"
+#include "headers/indices.h"
 
 int main(int argc, char *argv[])
 {
