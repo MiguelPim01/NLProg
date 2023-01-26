@@ -5,7 +5,7 @@
 #include "headers/indicePalavras.h"
 #include "headers/indices.h"
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[]) 
 {
     FILE *fileTxt, *fileIndices;
     Indices *indices = NULL;
@@ -24,11 +24,11 @@ int main(int argc, char *argv[])
     }
 
     // Obtem caminho até a pasta train
-    tamArg = strlen(argv[1])-4;
-    strncpy(caminho, argv[1], tamArg);
+    sprintf(caminhoTxt, "%s", argv[1]); // copia argv para 'caminhoTxt'
 
-    // Obtem caminho até o arquivo train.txt
-    sprintf(caminhoTxt, "%s.txt", caminho);
+    tamArg = strlen(caminhoTxt)-4; // diminui 4 do tamanho para nao considerar o '.txt'
+
+    strncpy(caminho, caminhoTxt, tamArg); // copia o caminho sem o '.txt' para 'caminho'
 
     fileTxt = fopen(caminhoTxt, "r");
 
@@ -39,7 +39,6 @@ int main(int argc, char *argv[])
     }
 
     // PASSO 1 (Ler os arquivos de noticias e criar os vetores de palavra e documento):
-
     indices = CarregaIndices(fileTxt, indices, caminho);
 
     // Abrindo o arquivo de saida do programa (indice)

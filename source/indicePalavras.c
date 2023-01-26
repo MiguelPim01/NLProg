@@ -125,7 +125,7 @@ void SalvaIndicePalavrasBin(IndicePalavras *p, FILE *f)
 {
     fwrite(&p->qtdPalavras, sizeof(int), 1, f);
 
-    for (int i; i < p->qtdPalavras; i++)
+    for (int i = 0; i < p->qtdPalavras; i++)
     {
         SalvaPalavraBin(p->arrayPalavras[i], f);
     }

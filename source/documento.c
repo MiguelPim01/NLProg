@@ -41,7 +41,7 @@ void AtribuiCaracDoc(Documento *doc, int posPalavra, int freqPalavra, double tf_
     doc->qtdPalavras++;
     doc->crts = (Caracteristicas **)realloc(doc->crts, doc->qtdPalavras*sizeof(Caracteristicas *));
 
-    doc->crts[doc->qtdPalavras-1] = InicializaCaracteristicas(doc->crts[doc->qtdPalavras], posPalavra, freqPalavra, tf_idf);
+    doc->crts[doc->qtdPalavras-1] = InicializaCaracteristicas(doc->crts[doc->qtdPalavras-1], posPalavra, freqPalavra, tf_idf);
 }
 
 void SalvaDocBin(Documento *doc, FILE *f)
@@ -50,12 +50,12 @@ void SalvaDocBin(Documento *doc, FILE *f)
 
     fwrite(doc->classe, sizeof(char), strlen(doc->classe), f);
 
+    fwrite(&doc->qtdPalavras, sizeof(int), 1, f);
+
     for (int i = 0; i < doc->qtdPalavras; i++)
     {
         SalvaCaracteristicasBin(doc->crts[i], f);
     }
-
-    fwrite("\n", sizeof(char), 1, f);
 }
 
 void ImprimeDoc(Documento *doc) 

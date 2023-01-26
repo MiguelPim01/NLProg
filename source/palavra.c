@@ -99,12 +99,12 @@ void SalvaPalavraBin(Palavra *p, FILE *f)
 {
     fwrite(p->palavra, sizeof(char), strlen(p->palavra), f);
 
-    for (int i; i < p->qtdAparicoes; i++)
+    fwrite(&p->qtdAparicoes, sizeof(int), 1, f);
+
+    for (int i = 0; i < p->qtdAparicoes; i++)
     {
         SalvaCaracteristicasBin(p->crts[i], f);
     }
-
-    fwrite("\n", sizeof(char), 1, f);
 }
 
 void ImprimePalavra(Palavra *p)
