@@ -1,6 +1,8 @@
 #ifndef INDICEDOCS_H
 #define INDICEDOCS_H
 
+#include "documento.h"
+
 typedef struct indiceDocs IndiceDocs;
 
 IndiceDocs * AtribuiNomeClasseIndiceDocs(IndiceDocs *docs, char *caminho, char *classe);
@@ -11,7 +13,7 @@ int ObtemQtdDocs(IndiceDocs *docs);
 
 void ImprimeDocs(IndiceDocs *docs);
 
-void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra, int freqPalavra, double tf_idf);
+Documento * AchaDocumento(IndiceDocs *docs, int posDocumento);
 
 void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f);
 

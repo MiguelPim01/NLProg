@@ -5,6 +5,7 @@
 
 #include "../headers/caracteristicas.h"
 #include "../headers/indiceDocs.h"
+#include "../headers/documento.h"
 
 struct caracteristicas {
     int posicao, frequencia;
@@ -76,5 +77,5 @@ void LiberaCaracteristicas(Caracteristicas *crts)
 
 void FinalizaCaracDocumentos_carac(Caracteristicas *crts, IndiceDocs *docs, int posPalavra)
 {
-    AchaDocParaAtribuirCarac(docs, crts->posicao, posPalavra, crts->frequencia, crts->tf_idf);
+    AtribuiCaracDoc(AchaDocumento(docs, crts->posicao), posPalavra, crts->frequencia, crts->tf_idf);
 }

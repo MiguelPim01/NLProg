@@ -69,9 +69,9 @@ void ImprimeDocs(IndiceDocs *docs)
     }
 }
 
-void AchaDocParaAtribuirCarac(IndiceDocs *docs, int posDocumento, int posPalavra, int freqPalavra, double tf_idf)
+Documento * AchaDocumento(IndiceDocs *docs, int posDocumento)
 {
-    AtribuiCaracDoc(docs->arrayDocs[posDocumento], posPalavra, freqPalavra, tf_idf);
+    return docs->arrayDocs[posDocumento];
 }
 
 void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f)
