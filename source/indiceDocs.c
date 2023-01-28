@@ -84,11 +84,25 @@ void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f)
     }
 }
 
+IndiceDocs * CarregaIndiceDocsBin(IndiceDocs *docs, FILE *f)
+{   
+    docs = (IndiceDocs *)malloc(sizeof(IndiceDocs));
+
+    fread(&docs->qtdDocs, sizeof(int), 1, f);
+
+    docs->arrayDocs = (Documento **)malloc(docs->qtdDocs*sizeof(Documento *)); // Alocando espaço exato para os ponteiros de documento
+
+    for (int i = 0; i < docs->qtdDocs; i++)
+    {
+        docs->arrayDocs[i] = CarregaDocBin(docs->arrayDocs[i], f);
+    }
+
+    return docs;
+}
+
 void LiberaIndiceDocs(IndiceDocs *docs)
 {
-    int i;
-
-    for (i = 0; i < docs->qtdDocs; i++)
+    for (int i = 0; i < docs->qtdDocs; i++)
     {
         LiberaDoc(docs->arrayDocs[i]);
     }

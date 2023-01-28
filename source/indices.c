@@ -68,6 +68,16 @@ void SalvaIndices(Indices *i, FILE *f)
     SalvaIndicePalavrasBin(i->palavras, f);
 }
 
+Indices * CarregaIndicesBin(Indices *i, FILE *f)
+{
+    i = (Indices *)malloc(sizeof(Indices));
+    
+    i->docs = CarregaIndiceDocsBin(i->docs, f);
+    i->palavras = CarregaIndicePalavrasBin(i->palavras, f);
+
+    return i;
+}
+
 void LiberaIndices(Indices *i)
 {
     LiberaIndiceDocs(i->docs);

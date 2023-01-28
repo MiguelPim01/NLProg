@@ -97,14 +97,50 @@ void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalav
 
 void SalvaPalavraBin(Palavra *p, FILE *f)
 {
-    fwrite(p->palavra, sizeof(char), strlen(p->palavra), f);
+    int tamPalavra=strlen(p->palavra)+1;
 
-    fwrite(&p->qtdAparicoes, sizeof(int), 1, f);
+    fwrite(&tamPalavra, sizeof(int), 1, f); // TAMANHO
+    
+    // Salvando a palavra
+    for (int i = 0 ; i < tamPalavra; i++)
+    {
+        fwrite(&p->palavra[i], sizeof(char), 1, f); // PALAVRA
+    }
+
+    fwrite(&p->qtdAparicoes, sizeof(int), 1, f); // APARIÇÕES
 
     for (int i = 0; i < p->qtdAparicoes; i++)
     {
-        SalvaCaracteristicasBin(p->crts[i], f);
+        SalvaCaracteristicasBin(p->crts[i], f); // CARACTERISTICAS
     }
+}
+
+Palavra * CarregaPalavraBin(Palavra *p, FILE *f)
+{
+    int tamPalavra=0;
+    
+    p = (Palavra *)malloc(sizeof(Palavra));
+
+    fread(&tamPalavra, sizeof(int), 1, f); // TAMANHO
+
+    p->palavra = (char *)malloc(tamPalavra*sizeof(char));
+    
+    // Lendo a palavra
+    for (int i = 0 ; i < tamPalavra; i++)
+    {
+        fread(&p->palavra[i], sizeof(char), 1, f); // PALAVRA
+    }
+
+    fread(&p->qtdAparicoes, sizeof(int), 1, f); // APARIÇÕES
+
+    p->crts = (Caracteristicas **)malloc(p->qtdAparicoes*sizeof(Caracteristicas *));
+
+    for (int i = 0; i < p->qtdAparicoes; i++)
+    {
+        p->crts[i] = CarregaCaracteristicasBin(p->crts[i], f); // CARACTERISTICAS
+    }
+
+    return p;
 }
 
 void ImprimePalavra(Palavra *p)
@@ -122,9 +158,7 @@ void ImprimePalavra(Palavra *p)
 
 void LiberaPalavra(Palavra *p)
 {
-    int i;
-
-    for (i = 0; i < p->qtdAparicoes; i++)
+    for (int i = 0; i < p->qtdAparicoes; i++)
     {
         LiberaCaracteristicas(p->crts[i]);
     }  

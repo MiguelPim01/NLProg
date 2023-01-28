@@ -11,8 +11,6 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc);
 
 Palavra * AdicionaFrequencia(Palavra *p, int nDoc);
 
-void AtribuiPalavra(Palavra *p, char *palavra, int nDoc);
-
 int ComparaPalavras(Palavra *p, char *palavra);
 
 int PelaPalavra(const void *a, const void *b);
@@ -22,6 +20,8 @@ void AtribuiTf_idfPalavra(Palavra *p, int n);
 void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalavra);
 
 void SalvaPalavraBin(Palavra *p, FILE *f);
+
+Palavra * CarregaPalavraBin(Palavra *p, FILE *f);
 
 void LiberaPalavra(Palavra *p);
 

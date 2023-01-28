@@ -17,6 +17,8 @@ void CalculaTf_idf(Caracteristicas *crts, int df, int n);
 
 void SalvaCaracteristicasBin(Caracteristicas *crts, FILE *f);
 
+Caracteristicas * CarregaCaracteristicasBin(Caracteristicas *crts, FILE *f);
+
 void ImprimeCaracteristicas(Caracteristicas *crts);
 
 void LiberaCaracteristicas(Caracteristicas *crts);

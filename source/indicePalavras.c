@@ -123,19 +123,33 @@ void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
 
 void SalvaIndicePalavrasBin(IndicePalavras *p, FILE *f)
 {
-    fwrite(&p->qtdPalavras, sizeof(int), 1, f);
+    fwrite(&p->qtdPalavras, sizeof(int), 1, f); // QTD_PALAVRAS
 
     for (int i = 0; i < p->qtdPalavras; i++)
     {
-        SalvaPalavraBin(p->arrayPalavras[i], f);
+        SalvaPalavraBin(p->arrayPalavras[i], f); // PALAVRAS
     }
+}
+
+IndicePalavras * CarregaIndicePalavrasBin(IndicePalavras *p, FILE *f)
+{
+    p = (IndicePalavras *)malloc(sizeof(IndicePalavras));
+
+    fread(&p->qtdPalavras, sizeof(int), 1, f); // QTD_PALAVRAS
+
+    p->arrayPalavras = (Palavra **)malloc(p->qtdPalavras*sizeof(Palavra *)); // Alocando espaço exato para os ponteiros de palavra
+
+    for (int i = 0; i < p->qtdPalavras; i++)
+    {
+        p->arrayPalavras[i] = CarregaPalavraBin(p->arrayPalavras[i], f); // PALAVRAS
+    }
+
+    return p;
 }
 
 void LiberaIndicePalavras(IndicePalavras *p)
 {
-    int i;
-
-    for (i = 0; i < p->qtdPalavras; i++)
+    for (int i = 0; i < p->qtdPalavras; i++)
     {
         LiberaPalavra(p->arrayPalavras[i]);
     }

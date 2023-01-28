@@ -17,6 +17,8 @@ Documento * AchaDocumento(IndiceDocs *docs, int posDocumento);
 
 void SalvaIndiceDocsBin(IndiceDocs *docs, FILE *f);
 
+IndiceDocs * CarregaIndiceDocsBin(IndiceDocs *docs, FILE *f);
+
 void LiberaIndiceDocs(IndiceDocs *docs);
 
 #endif

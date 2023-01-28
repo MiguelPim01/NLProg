@@ -9,6 +9,8 @@ void AtribuiCaracDoc(Documento *doc, int posPalavra, int freqPalavra, double tf_
 
 void SalvaDocBin(Documento *doc, FILE *f);
 
+Documento * CarregaDocBin(Documento *doc, FILE *f);
+
 void ImprimeDoc(Documento *doc);
 
 void LiberaDoc(Documento *doc);

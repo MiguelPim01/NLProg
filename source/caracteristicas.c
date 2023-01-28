@@ -51,7 +51,7 @@ void CalculaTf_idf(Caracteristicas *crts, int df, int n)
     double tf, idf;
 
     tf = crts->frequencia;
-    idf = log((1+n)/(1+df))+1;
+    idf = log((1+n)/(double)(1+df))+1;
 
     crts->tf_idf = tf*idf;
 }
@@ -63,6 +63,19 @@ void SalvaCaracteristicasBin(Caracteristicas *crts, FILE *f)
     fwrite(&crts->frequencia, sizeof(int), 1, f);
 
     fwrite(&crts->tf_idf, sizeof(double), 1, f);
+}
+
+Caracteristicas * CarregaCaracteristicasBin(Caracteristicas *crts, FILE *f)
+{
+    crts = AlocaCaracteristicas();
+
+    fread(&crts->posicao, sizeof(int), 1, f);
+
+    fread(&crts->frequencia, sizeof(int), 1, f);
+
+    fread(&crts->tf_idf, sizeof(double), 1, f);
+
+    return crts;
 }
 
 void ImprimeCaracteristicas(Caracteristicas *crts)

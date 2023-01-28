@@ -46,16 +46,60 @@ void AtribuiCaracDoc(Documento *doc, int posPalavra, int freqPalavra, double tf_
 
 void SalvaDocBin(Documento *doc, FILE *f)
 {
-    fwrite(doc->nome, sizeof(char), strlen(doc->nome), f);
+    int tamNome = strlen(doc->nome)+1;
+    int tamClasse = strlen(doc->classe)+1;
 
-    fwrite(doc->classe, sizeof(char), strlen(doc->classe), f);
+    fwrite(&tamNome, sizeof(int), 1, f); // TAMANHO NOME
+    fwrite(&tamClasse, sizeof(int), 1, f); // TAMANHO CLASSE
 
-    fwrite(&doc->qtdPalavras, sizeof(int), 1, f);
+    for (int i = 0; i < tamNome; i++)
+    {
+        fwrite(&doc->nome[i], sizeof(char), 1, f); // NOME
+    }
+    for (int i = 0; i < tamClasse; i++)
+    {
+        fwrite(&doc->classe[i], sizeof(char), 1, f); // CLASSE
+    }
+
+    fwrite(&doc->qtdPalavras, sizeof(int), 1, f); // QTD_PALAVRAS
 
     for (int i = 0; i < doc->qtdPalavras; i++)
     {
-        SalvaCaracteristicasBin(doc->crts[i], f);
+        SalvaCaracteristicasBin(doc->crts[i], f); // CARACTERISTICAS
     }
+}
+
+Documento * CarregaDocBin(Documento *doc, FILE *f)
+{
+    int tamNome=0, tamClasse=0;
+
+    fread(&tamNome, sizeof(int), 1, f); // TAMANHO NOME
+    fread(&tamClasse, sizeof(int), 1, f); // TAMANHO CLASSE
+
+    doc = AlocaDocumento(tamNome, tamClasse);
+
+    // Lendo o nome
+    for (int i = 0; i < tamNome; i++)
+    {
+        fread(&doc->nome[i], sizeof(char), 1, f); // NOME
+    }
+
+    // Lendo a classe
+    for (int i = 0; i < tamClasse; i++)
+    {
+        fread(&doc->classe[i], sizeof(char), 1, f); // CLASSE
+    }
+
+    fread(&doc->qtdPalavras, sizeof(int), 1, f); // QTD_PALAVRAS
+
+    doc->crts = (Caracteristicas **)malloc(doc->qtdPalavras*sizeof(Caracteristicas *));
+
+    for (int i = 0; i < doc->qtdPalavras; i++)
+    {
+        doc->crts[i] = CarregaCaracteristicasBin(doc->crts[i], f); // CARACTERISTICAS
+    }
+
+    return doc;
 }
 
 void ImprimeDoc(Documento *doc) 
@@ -70,9 +114,7 @@ void ImprimeDoc(Documento *doc)
 
 void LiberaDoc(Documento *doc)
 {
-    int i;
-
-    for (i = 0; i < doc->qtdPalavras; i++)
+    for (int i = 0; i < doc->qtdPalavras; i++)
     {
         LiberaCaracteristicas(doc->crts[i]);
     }

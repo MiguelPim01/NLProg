@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
     FILE *fileBin;
-    Indices *indices;
+    Indices *indices = NULL;
 
     if (argc <= 2)
     {
@@ -26,6 +26,13 @@ int main(int argc, char *argv[])
         printf("ERRO: Não foi possivel abrir o arquivo %s\n", caminho);
         return 1;
     }
+
+    indices = CarregaIndicesBin(indices, fileBin);
+
+    LiberaIndices(indices);
+
+    fclose(fileBin);
+
 
     return 0;
 }
