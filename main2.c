@@ -2,11 +2,15 @@
 #include <stdlib.h>
 
 #include "headers/indices.h"
+#include "headers/palavra.h"
 
 int main(int argc, char *argv[])
 {
     FILE *fileBin;
     Indices *indices = NULL;
+
+    char texto[100], caminho[100];
+    texto[0]='\0'; caminho[0]='\0';
 
     if (argc <= 2)
     {
@@ -14,9 +18,6 @@ int main(int argc, char *argv[])
         printf("Para rodar corretamente: ./prog2 <arquivo_indices.bin> <numero_K>\n");
         return 1;
     }
-
-    char caminho[100];
-    caminho[0]='\0';
 
     sprintf(caminho, "%s", argv[1]);
     fileBin = fopen(caminho, "rb");
@@ -28,6 +29,8 @@ int main(int argc, char *argv[])
     }
 
     indices = CarregaIndicesBin(indices, fileBin);
+
+    scanf("%[^\n]", texto);
 
     LiberaIndices(indices);
 

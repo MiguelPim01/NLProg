@@ -111,6 +111,15 @@ void OrdenaIndicePalavras(IndicePalavras *p)
     qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
 }
 
+Palavra * BuscaPalavra(IndicePalavras *p, Palavra *palavra)
+{
+    Palavra *palavraBuscada;
+
+    palavraBuscada = (Palavra *)bsearch(palavra, p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
+
+    return palavraBuscada;
+}
+
 void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
 {
     int i;

@@ -22,6 +22,8 @@ Palavra * AlocaPalavra(char *palavra, int tamPalavra)
     p->crts = (Caracteristicas **)malloc(sizeof(Caracteristicas *));
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
 
+    p->qtdAparicoes = 1;
+
     return p;
 }
 

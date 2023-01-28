@@ -2,6 +2,7 @@
 #define INDICEPALAVRAS_H
 
 #include "../headers/indiceDocs.h"
+#include "../headers/palavra.h"
 
 typedef struct indicePalavras IndicePalavras;
 
@@ -24,6 +25,8 @@ IndicePalavras * CarregaIndicePalavrasBin(IndicePalavras *p, FILE *f);
 void ImprimePalavras(IndicePalavras *p);
 
 void OrdenaIndicePalavras(IndicePalavras *p);
+
+Palavra * BuscaPalavra(IndicePalavras *p, Palavra *palavra);
 
 void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs);
 
