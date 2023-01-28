@@ -114,8 +114,9 @@ void OrdenaIndicePalavras(IndicePalavras *p)
 Palavra ** BuscaPalavra(IndicePalavras *p, char *palavra)
 {
     Palavra *p_usuario = AlocaPalavra_auxBusca(palavra);
+    Palavra **ptr_pUsuario = &p_usuario;
 
-    Palavra **p_buscada = (Palavra **)bsearch(p_usuario, p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
+    Palavra **p_buscada = (Palavra **)bsearch(ptr_pUsuario, p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
 
     LiberaPalavra_auxBusca(p_usuario);
 
