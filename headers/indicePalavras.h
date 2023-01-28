@@ -26,7 +26,7 @@ void ImprimePalavras(IndicePalavras *p);
 
 void OrdenaIndicePalavras(IndicePalavras *p);
 
-Palavra * BuscaPalavra(IndicePalavras *p, Palavra *palavra);
+Palavra ** BuscaPalavra(IndicePalavras *p, char *palavra);
 
 void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs);
 

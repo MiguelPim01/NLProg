@@ -3,11 +3,13 @@
 
 #include "headers/indices.h"
 #include "headers/palavra.h"
+#include "headers/indicePalavras.h"
 
 int main(int argc, char *argv[])
 {
     FILE *fileBin;
     Indices *indices = NULL;
+    Palavra **palavraBuscada = NULL;
 
     char texto[100], caminho[100];
     texto[0]='\0'; caminho[0]='\0';
@@ -28,10 +30,28 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // LENDO E ARMAZENANDO OS INDICES DE DOCS E PALAVRAS:
     indices = CarregaIndicesBin(indices, fileBin);
 
-    scanf("%[^\n]", texto);
+    // ImprimePalavras(RetornaArrayPalavras(indices));
 
+    // TESTANDO A FUNCAO bsearch:
+    scanf("%[^\n]", texto);
+    scanf("%*c");
+    printf("palavra digitada -> %s\n", texto);
+
+    palavraBuscada = BuscaPalavra(RetornaArrayPalavras(indices), texto);
+
+    if (palavraBuscada == NULL)
+    {
+        printf("Essa palavra nao existe no indice!\n");
+    }
+    else 
+    {
+        ImprimePalavra(*palavraBuscada);
+    }
+
+    // LIBERANDO MEMORIA:
     LiberaIndices(indices);
 
     fclose(fileBin);

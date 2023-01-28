@@ -22,9 +22,25 @@ Palavra * AlocaPalavra(char *palavra, int tamPalavra)
     p->crts = (Caracteristicas **)malloc(sizeof(Caracteristicas *));
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
 
-    p->qtdAparicoes = 1;
+    return p;
+}
+
+Palavra * AlocaPalavra_auxBusca(char *palavra)
+{
+    Palavra *p = (Palavra *)malloc(sizeof(Palavra));
+
+    int tamPalavra=strlen(palavra)+1;
+    p->palavra = (char *)malloc(tamPalavra*sizeof(char));
+
+    strncpy(p->palavra, palavra, tamPalavra);
 
     return p;
+}
+
+void LiberaPalavra_auxBusca(Palavra *p)
+{
+    free(p->palavra);
+    free(p);
 }
 
 Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
@@ -71,10 +87,10 @@ int ComparaPalavras(Palavra *p, char *palavra)
 
 int PelaPalavra(const void *a, const void *b)
 {
-    Palavra *p1 = (Palavra *)a;
-    Palavra *p2 = (Palavra *)b;
+    const Palavra **p1 = (const Palavra **)a;
+    const Palavra **p2 = (const Palavra **)b;
 
-    return strcmp(p1->palavra, p2->palavra);
+    return strcmp((*p1)->palavra, (*p2)->palavra);
 }
 
 void AtribuiTf_idfPalavra(Palavra *p, int n)
@@ -147,14 +163,14 @@ Palavra * CarregaPalavraBin(Palavra *p, FILE *f)
 
 void ImprimePalavra(Palavra *p)
 {
-    int i;
+    // int i;
 
     printf("%s\n", p->palavra);
 
-    for (i = 0; i < p->qtdAparicoes; i++)
-    {
-        ImprimeCaracteristicas(p->crts[i]);
-    }
+    // for (i = 0; i < p->qtdAparicoes; i++)
+    // {
+    //     ImprimeCaracteristicas(p->crts[i]);
+    // }
 
 }
 

@@ -85,3 +85,8 @@ void LiberaIndices(Indices *i)
 
     free(i);
 }
+
+IndicePalavras * RetornaArrayPalavras(Indices *i)
+{
+    return i->palavras;
+}

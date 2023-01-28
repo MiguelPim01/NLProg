@@ -111,13 +111,15 @@ void OrdenaIndicePalavras(IndicePalavras *p)
     qsort(p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
 }
 
-Palavra * BuscaPalavra(IndicePalavras *p, Palavra *palavra)
+Palavra ** BuscaPalavra(IndicePalavras *p, char *palavra)
 {
-    Palavra *palavraBuscada;
+    Palavra *p_usuario = AlocaPalavra_auxBusca(palavra);
 
-    palavraBuscada = (Palavra *)bsearch(palavra, p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
+    Palavra **p_buscada = (Palavra **)bsearch(p_usuario, p->arrayPalavras, p->qtdPalavras, sizeof(Palavra *), PelaPalavra);
 
-    return palavraBuscada;
+    LiberaPalavra_auxBusca(p_usuario);
+
+    return p_buscada;
 }
 
 void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs)
@@ -176,4 +178,5 @@ void ImprimePalavras(IndicePalavras *p)
         printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
     }
+    printf("    qtd: %d", p->qtdPalavras);
 }

@@ -7,6 +7,10 @@ typedef struct palavra Palavra;
 
 Palavra * AlocaPalavra(char *palavra, int tamPalavra);
 
+Palavra * AlocaPalavra_auxBusca(char *palavra);
+
+void LiberaPalavra_auxBusca(Palavra *p);
+
 Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc);
 
 Palavra * AdicionaFrequencia(Palavra *p, int nDoc);
