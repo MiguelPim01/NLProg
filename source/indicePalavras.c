@@ -5,6 +5,7 @@
 #include "../headers/indicePalavras.h"
 #include "../headers/palavra.h"
 #include "../headers/indiceDocs.h"
+#include "../headers/arrayBusca.h"
 
 #define QTD_INICIAL_ALLOC 25
 
@@ -41,6 +42,14 @@ void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, cha
 
     if (p_buscada != NULL)
     {
+        if (arrayDeBusca == NULL)
+        {
+            arrayDeBusca = (IndicePalavras *)malloc(sizeof(IndicePalavras));
+
+            arrayDeBusca->arrayPalavras = (Palavra **)malloc(mult*sizeof(Palavra *));
+            arrayDeBusca->qtdPalavras = 0;
+        }
+        
         if (arrayDeBusca->qtdPalavras >= mult)
         {
             mult *= 2;
@@ -202,4 +211,18 @@ void ImprimePalavras(IndicePalavras *p)
         ImprimePalavra(p->arrayPalavras[i]);
     }
     printf("    qtd: %d", p->qtdPalavras);
+}
+
+void LiberaIndicePalavrasBuscadas(IndicePalavras *p)
+{
+    free(p->arrayPalavras);
+    free(p);
+}
+
+void CriaArrayDeBusca_IndxPalavras(IndicePalavras *p, ArrayBusca *arrayB, IndiceDocs *docs)
+{
+    for (int i = 0; i < p->qtdPalavras; i++)
+    {
+        CriaArrayDeBusca_Palavra(p->arrayPalavras[i], arrayB, docs);
+    }
 }

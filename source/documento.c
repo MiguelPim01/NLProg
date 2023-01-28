@@ -125,3 +125,13 @@ void LiberaDoc(Documento *doc)
 
     free(doc);
 }
+
+int DocsSaoIguais(Documento *doc1, Documento *doc2)
+{
+    if (doc1 == doc2)
+    {
+        return 1;
+    }
+
+    return 0;
+}

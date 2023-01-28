@@ -1,7 +1,8 @@
 #ifndef PALAVRA_H
 #define PALAVRA_H
 
-#include "../headers/indiceDocs.h"
+#include "indiceDocs.h"
+#include "arrayBusca.h"
 
 typedef struct palavra Palavra;
 
@@ -30,5 +31,7 @@ Palavra * CarregaPalavraBin(Palavra *p, FILE *f);
 void LiberaPalavra(Palavra *p);
 
 void ImprimePalavra(Palavra *p);
+
+void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs);
 
 #endif

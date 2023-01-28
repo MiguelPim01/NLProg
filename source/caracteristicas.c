@@ -6,6 +6,7 @@
 #include "../headers/caracteristicas.h"
 #include "../headers/indiceDocs.h"
 #include "../headers/documento.h"
+#include "../headers/arrayBusca.h"
 
 struct caracteristicas {
     int posicao, frequencia;
@@ -91,4 +92,9 @@ void LiberaCaracteristicas(Caracteristicas *crts)
 void FinalizaCaracDocumentos_carac(Caracteristicas *crts, IndiceDocs *docs, int posPalavra)
 {
     AtribuiCaracDoc(AchaDocumento(docs, crts->posicao), posPalavra, crts->frequencia, crts->tf_idf);
+}
+
+void CriaArrayDeBusca_Carac(Caracteristicas *crts, ArrayBusca *arrayB, IndiceDocs *docs)
+{
+    CriaArrayDeBusca(arrayB, crts->posicao, crts->tf_idf, docs);
 }

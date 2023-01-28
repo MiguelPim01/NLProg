@@ -1,8 +1,9 @@
 #ifndef INDICEPALAVRAS_H
 #define INDICEPALAVRAS_H
 
-#include "../headers/indiceDocs.h"
-#include "../headers/palavra.h"
+#include "indiceDocs.h"
+#include "palavra.h"
+#include "arrayBusca.h"
 
 typedef struct indicePalavras IndicePalavras;
 
@@ -31,5 +32,9 @@ void OrdenaIndicePalavras(IndicePalavras *p);
 Palavra ** BuscaPalavra(IndicePalavras *p, char *palavra);
 
 void FinalizaCaracDocumentos_indxPalavras(IndicePalavras *p, IndiceDocs *docs);
+
+void LiberaIndicePalavrasBuscadas(IndicePalavras *p);
+
+void CriaArrayDeBusca_IndxPalavras(IndicePalavras *p, ArrayBusca *arrayB, IndiceDocs *docs);
 
 #endif

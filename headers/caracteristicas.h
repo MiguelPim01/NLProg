@@ -25,4 +25,6 @@ void LiberaCaracteristicas(Caracteristicas *crts);
 
 void FinalizaCaracDocumentos_carac(Caracteristicas *crts, IndiceDocs *docs, int posPalavra);
 
+void CriaArrayDeBusca_Carac(Caracteristicas *crts, ArrayBusca *arrayB, IndiceDocs *docs);
+
 #endif

@@ -15,4 +15,6 @@ void ImprimeDoc(Documento *doc);
 
 void LiberaDoc(Documento *doc);
 
+int DocsSaoIguais(Documento *doc1, Documento *doc2);
+
 #endif

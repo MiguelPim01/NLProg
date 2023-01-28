@@ -17,4 +17,6 @@ void LiberaIndices(Indices *i);
 
 IndicePalavras * RetornaArrayPalavras(Indices *i);
 
+IndiceDocs * RetornaIndiceDocs(Indices *i);
+
 #endif

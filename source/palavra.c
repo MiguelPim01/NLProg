@@ -5,6 +5,7 @@
 #include "../headers/palavra.h"
 #include "../headers/caracteristicas.h"
 #include "../headers/indiceDocs.h"
+#include "../headers/arrayBusca.h"
 
 #define FREQ_INICIAL 1
 #define TF_IDF_PADRAO 0
@@ -184,4 +185,12 @@ void LiberaPalavra(Palavra *p)
     free(p->crts); 
     free(p->palavra);
     free(p);
+}
+
+void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs)
+{
+    for (int i = 0; i < p->qtdAparicoes; i++)
+    {
+        CriaArrayDeBusca_Carac(p->crts[i], arrayB, docs);
+    }
 }

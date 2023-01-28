@@ -90,3 +90,8 @@ IndicePalavras * RetornaArrayPalavras(Indices *i)
 {
     return i->palavras;
 }
+
+IndiceDocs * RetornaIndiceDocs(Indices *i)
+{
+    return i->docs;
+}

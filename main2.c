@@ -4,12 +4,14 @@
 #include "headers/indices.h"
 #include "headers/palavra.h"
 #include "headers/indicePalavras.h"
+#include "headers/arrayBusca.h"
 
 int main(int argc, char *argv[])
 {
     FILE *fileBin;
     Indices *indices = NULL;
     IndicePalavras *palavrasBuscadas = NULL;
+    ArrayBusca *arrayB = NULL;
 
     char caminho[100], pal[50];
     caminho[0]='\0'; pal[0]='\0';
@@ -34,8 +36,6 @@ int main(int argc, char *argv[])
     indices = CarregaIndicesBin(indices, fileBin);
 
     // 1 - BUSCAR NOTICIAS:
-        palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
-
         while (scanf("%s", pal) == 1)
         {
             scanf("%*c");
@@ -43,12 +43,16 @@ int main(int argc, char *argv[])
             AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), pal);
         } // Constroi array de de ponteiros para as palavras digitadas
 
+        arrayB = InicializaArrayBusca();
+
 
 
 
     // LIBERANDO MEMORIA:
     LiberaIndices(indices);
+    LiberaIndicePalavrasBuscadas(palavrasBuscadas);
 
+    // FECHANDO ARQUIVO:
     fclose(fileBin);
 
 
