@@ -6,6 +6,8 @@
 #include "../headers/palavra.h"
 #include "../headers/indiceDocs.h"
 
+#define QTD_INICIAL_ALLOC 25
+
 struct indicePalavras {
     Palavra **arrayPalavras;
     int qtdPalavras;
@@ -15,7 +17,7 @@ IndicePalavras * AlocaIdxPalavras()
 {
     IndicePalavras *palavras = (IndicePalavras *)malloc(sizeof(IndicePalavras));
 
-    int mult = 25;
+    int mult = QTD_INICIAL_ALLOC;
     palavras->arrayPalavras = (Palavra **)malloc(mult*sizeof(Palavra *));
 
     return palavras;
@@ -30,10 +32,30 @@ IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras)
     return palavras;
 }
 
+void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, char *palavra)
+{
+    static int mult = QTD_INICIAL_ALLOC;
+    Palavra **p_buscada = NULL;
+
+    p_buscada = BuscaPalavra(p, palavra);
+
+    if (p_buscada != NULL)
+    {
+        if (arrayDeBusca->qtdPalavras >= mult)
+        {
+            mult *= 2;
+            arrayDeBusca->arrayPalavras = (Palavra **)realloc(arrayDeBusca->arrayPalavras, mult*sizeof(Palavra *));
+        }
+
+        arrayDeBusca->arrayPalavras[arrayDeBusca->qtdPalavras] = *p_buscada;
+        arrayDeBusca->qtdPalavras++;
+    }
+}
+
 IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminho)
 {
     FILE *fileDoc;
-    static int mult = 25, posicao = 0;
+    static int mult = QTD_INICIAL_ALLOC, posicao = 0;
     char palavra[50];
     palavra[0] = '\0';
 

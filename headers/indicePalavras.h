@@ -8,6 +8,8 @@ typedef struct indicePalavras IndicePalavras;
 
 IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras);
 
+void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, char *palavra);
+
 IndicePalavras * AlocaIdxPalavras();
 
 IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminhoAux);

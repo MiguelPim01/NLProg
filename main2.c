@@ -9,10 +9,10 @@ int main(int argc, char *argv[])
 {
     FILE *fileBin;
     Indices *indices = NULL;
-    Palavra **palavraBuscada = NULL;
+    IndicePalavras *palavrasBuscadas = NULL;
 
-    char texto[100], caminho[100];
-    texto[0]='\0'; caminho[0]='\0';
+    char caminho[100], pal[50];
+    caminho[0]='\0'; pal[0]='\0';
 
     if (argc <= 2)
     {
@@ -33,23 +33,18 @@ int main(int argc, char *argv[])
     // LENDO E ARMAZENANDO OS INDICES DE DOCS E PALAVRAS:
     indices = CarregaIndicesBin(indices, fileBin);
 
-    // ImprimePalavras(RetornaArrayPalavras(indices));
+    // 1 - BUSCAR NOTICIAS:
+        palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
 
-    // TESTANDO A FUNCAO bsearch:
-    scanf("%[^\n]", texto);
-    scanf("%*c");
-    printf("palavra digitada -> %s\n", texto);
+        while (scanf("%s", pal) == 1)
+        {
+            scanf("%*c");
 
-    palavraBuscada = BuscaPalavra(RetornaArrayPalavras(indices), texto);
+            AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), pal);
+        } // Constroi array de de ponteiros para as palavras digitadas
 
-    if (palavraBuscada == NULL)
-    {
-        printf("Essa palavra nao existe no indice!\n");
-    }
-    else 
-    {
-        ImprimePalavra(*palavraBuscada);
-    }
+
+
 
     // LIBERANDO MEMORIA:
     LiberaIndices(indices);
