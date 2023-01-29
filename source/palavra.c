@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "../headers/palavra.h"
 #include "../headers/caracteristicas.h"
@@ -96,11 +97,14 @@ int PelaPalavra(const void *a, const void *b)
 
 void AtribuiTf_idfPalavra(Palavra *p, int n)
 {
-    int i;
+    int i = 0;
+    double idf = 0;
+
+    idf = log((double)(1+n)/(double)(1+p->qtdAparicoes))+1;
 
     for (i = 0; i < p->qtdAparicoes; i++)
     {
-        CalculaTf_idf(p->crts[i], p->qtdAparicoes, n);
+        CalculaTf_idf(p->crts[i], idf);
     }
 }
 

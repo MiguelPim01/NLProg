@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 #include "../headers/caracteristicas.h"
 #include "../headers/indiceDocs.h"
@@ -47,12 +46,11 @@ int VerificaSeAddFrequencia(Caracteristicas * crts, int nDoc)
     return 0;
 }
 
-void CalculaTf_idf(Caracteristicas *crts, int df, int n)
+void CalculaTf_idf(Caracteristicas *crts, double idf)
 {
-    double tf, idf;
+    double tf;
 
     tf = crts->frequencia;
-    idf = log((1+n)/(double)(1+df))+1;
 
     crts->tf_idf = tf*idf;
 }

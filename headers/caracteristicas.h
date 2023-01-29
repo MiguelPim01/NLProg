@@ -14,7 +14,7 @@ Caracteristicas * SomaNaFrequencia(Caracteristicas *crts);
 
 int VerificaSeAddFrequencia(Caracteristicas * crts, int pos);
 
-void CalculaTf_idf(Caracteristicas *crts, int df, int n);
+void CalculaTf_idf(Caracteristicas *crts, double idf);
 
 void SalvaCaracteristicasBin(Caracteristicas *crts, FILE *f);
 
