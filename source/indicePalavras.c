@@ -41,15 +41,7 @@ void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, cha
     p_buscada = BuscaPalavra(p, palavra);
 
     if (p_buscada != NULL)
-    {
-        if (arrayDeBusca == NULL)
-        {
-            arrayDeBusca = (IndicePalavras *)malloc(sizeof(IndicePalavras));
-
-            arrayDeBusca->arrayPalavras = (Palavra **)malloc(mult*sizeof(Palavra *));
-            arrayDeBusca->qtdPalavras = 0;
-        }
-        
+    {   
         if (arrayDeBusca->qtdPalavras >= mult)
         {
             mult *= 2;
@@ -215,6 +207,7 @@ void ImprimePalavras(IndicePalavras *p)
 
 void LiberaIndicePalavrasBuscadas(IndicePalavras *p)
 {
+    free(p->arrayPalavras);
     free(p);
 }
 

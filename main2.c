@@ -36,7 +36,10 @@ int main(int argc, char *argv[])
     // LENDO E ARMAZENANDO OS INDICES DE DOCS E PALAVRAS:
     indices = CarregaIndicesBin(indices, fileBin);
 
+    
     // 1 - BUSCAR NOTICIAS:
+        palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
+
         scanf("%[^\n]", texto);
 
         token = strtok(texto, " ");
@@ -50,7 +53,7 @@ int main(int argc, char *argv[])
 
         arrayB = InicializaArrayBusca();
 
-        CriaArrayDeBusca_IndxPalavras(RetornaArrayPalavras(indices), arrayB, RetornaIndiceDocs(indices));
+        CriaArrayDeBusca_IndxPalavras(palavrasBuscadas, arrayB, RetornaIndiceDocs(indices));
 
         OrdenaArrayBusca(arrayB);
 
