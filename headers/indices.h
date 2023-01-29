@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 
+#include "indiceDocs.h"
 #include "indicePalavras.h"
 
 typedef struct indices Indices;

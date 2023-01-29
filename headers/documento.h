@@ -1,6 +1,8 @@
 #ifndef DOCUMENTO_H
 #define DOCUMENTO_H
 
+#include <stdio.h>
+
 typedef struct documento Documento;
 
 Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe);

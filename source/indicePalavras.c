@@ -215,7 +215,6 @@ void ImprimePalavras(IndicePalavras *p)
 
 void LiberaIndicePalavrasBuscadas(IndicePalavras *p)
 {
-    free(p->arrayPalavras);
     free(p);
 }
 

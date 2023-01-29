@@ -1,8 +1,10 @@
 #ifndef PALAVRA_H
 #define PALAVRA_H
 
-#include "indiceDocs.h"
+#include <stdio.h>
+
 #include "arrayBusca.h"
+#include "indiceDocs.h"
 
 typedef struct palavra Palavra;
 

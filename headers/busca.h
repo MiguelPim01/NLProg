@@ -11,4 +11,10 @@ void SomaTF_IDF(Busca *b, double tf_idf);
 
 Documento * RetornaDocumentoArrayDeBusca(Busca *b);
 
+void LiberaBusca(Busca *b);
+
+int PeloTF_IDF(const void *a, const void *b);
+
+void PrintaBusca(Busca *b);
+
 #endif

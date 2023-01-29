@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "headers/indices.h"
 #include "headers/palavra.h"
@@ -13,8 +14,8 @@ int main(int argc, char *argv[])
     IndicePalavras *palavrasBuscadas = NULL;
     ArrayBusca *arrayB = NULL;
 
-    char caminho[100], pal[50];
-    caminho[0]='\0'; pal[0]='\0';
+    char caminho[100], texto[100], *token;
+    caminho[0]='\0'; texto[0]='\0';
 
     if (argc <= 2)
     {
@@ -36,21 +37,29 @@ int main(int argc, char *argv[])
     indices = CarregaIndicesBin(indices, fileBin);
 
     // 1 - BUSCAR NOTICIAS:
-        while (scanf("%s", pal) == 1)
-        {
-            scanf("%*c");
+        scanf("%[^\n]", texto);
 
-            AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), pal);
+        token = strtok(texto, " ");
+
+        while (token)
+        {
+            AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), token);
+
+            token = strtok(NULL, " ");
         } // Constroi array de de ponteiros para as palavras digitadas
 
         arrayB = InicializaArrayBusca();
 
+        CriaArrayDeBusca_IndxPalavras(RetornaArrayPalavras(indices), arrayB, RetornaIndiceDocs(indices));
 
+        OrdenaArrayBusca(arrayB);
 
+        PrintaResultadoDaBusca(arrayB);
 
     // LIBERANDO MEMORIA:
     LiberaIndices(indices);
     LiberaIndicePalavrasBuscadas(palavrasBuscadas);
+    LiberaArrayBusca(arrayB);
 
     // FECHANDO ARQUIVO:
     fclose(fileBin);

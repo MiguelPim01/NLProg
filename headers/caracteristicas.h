@@ -1,7 +1,8 @@
 #ifndef CARACTERISTICAS_H
 #define CARACTERISTICAS_H
 
-#include "../headers/indiceDocs.h"
+#include "indicePalavras.h"
+#include "indiceDocs.h"
 
 typedef struct caracteristicas Caracteristicas;
 

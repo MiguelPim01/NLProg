@@ -104,12 +104,14 @@ Documento * CarregaDocBin(Documento *doc, FILE *f)
 
 void ImprimeDoc(Documento *doc) 
 {
-    int i;
+    // int i;
+
+    printf("nome: %s - classe: %s\n", doc->nome, doc->classe);
  
-    for (i = 0; i < doc->qtdPalavras; i++)
-    {
-        ImprimeCaracteristicas(doc->crts[i]);
-    }
+    // for (i = 0; i < doc->qtdPalavras; i++)
+    // {
+    //     ImprimeCaracteristicas(doc->crts[i]);
+    // }
 }
 
 void LiberaDoc(Documento *doc)

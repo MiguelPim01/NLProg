@@ -1,9 +1,7 @@
 #ifndef INDICEPALAVRAS_H
 #define INDICEPALAVRAS_H
 
-#include "indiceDocs.h"
 #include "palavra.h"
-#include "arrayBusca.h"
 
 typedef struct indicePalavras IndicePalavras;
 
