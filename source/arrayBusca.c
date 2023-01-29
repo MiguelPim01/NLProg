@@ -90,7 +90,7 @@ void PrintaResultadoDaBusca(ArrayBusca *arrayB)
 
         for (i = 0; i < arrayB->qtdDocs && i < 10; i++)
         {
-            printf("%d ==> ", i);
+            printf("%d ==> ", i+1);
             PrintaBusca(arrayB->arrayBusca[i]);
         }
     }
