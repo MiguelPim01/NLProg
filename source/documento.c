@@ -5,6 +5,8 @@
 #include "../headers/documento.h"
 #include "../headers/caracteristicas.h"
 
+#define ALLOC_INICIAL 25
+
 struct documento {
     char *nome, *classe;
     Caracteristicas **crts;

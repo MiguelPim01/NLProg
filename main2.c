@@ -37,32 +37,60 @@ int main(int argc, char *argv[])
     indices = CarregaIndicesBin(indices, fileBin);
 
     
-    // 1 - BUSCAR NOTICIAS:
-        palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
+    // FUNCIONAMENTO DO PROGAMA:
 
-        scanf("%[^\n]", texto);
+    char opcao;
 
-        token = strtok(texto, " ");
+    printf("1 - Buscar Noticia\n");
+    printf("2 - Classificar Noticia\n");
+    printf("3 - Relatorio da Palavra\n");
+    printf("4 - Relatorio do Documento\n");
+    printf("Escolha uma opcao: ");
+    scanf("%c", &opcao);
+    scanf("%*[^\n]");
+    scanf("%*c");
 
-        while (token)
-        {
-            AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), token);
+    switch (opcao)
+    {
+        case '1': // BUSCAR NOTICIA (20% nota)
+            palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
+        
+            printf("\nBusque algo: ");
+            scanf("%[^\n]", texto);
+            token = strtok(texto, " ");
+            printf("\n");
 
-            token = strtok(NULL, " ");
-        } // Constroi array de de ponteiros para as palavras digitadas
+            while (token)
+            {
+                AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), token);
 
-        arrayB = InicializaArrayBusca();
+                token = strtok(NULL, " ");
+            } // Constroi array de de ponteiros para as palavras digitadas
 
-        CriaArrayDeBusca_IndxPalavras(palavrasBuscadas, arrayB, RetornaIndiceDocs(indices));
+            arrayB = InicializaArrayBusca();
 
-        OrdenaArrayBusca(arrayB);
+            CriaArrayDeBusca_IndxPalavras(palavrasBuscadas, arrayB, RetornaIndiceDocs(indices));
 
-        PrintaResultadoDaBusca(arrayB);
+            OrdenaArrayBusca(arrayB);
+
+            PrintaResultadoDaBusca(arrayB);
+
+            LiberaIndicePalavrasBuscadas(palavrasBuscadas);
+            LiberaArrayBusca(arrayB);
+            break;
+        case '2': // CLASSIFICAR NOTICIA (30% nota)
+            break;
+        case '3': // RELATORIO DA PALAVRA (5% nota)
+            break;
+        case '4': // RELATORIO DO DOCUMENTO (5% nota)
+            break;
+        default:
+            printf("ERRO: Opcao Invalida!\n");
+            break;
+    }
 
     // LIBERANDO MEMORIA:
     LiberaIndices(indices);
-    LiberaIndicePalavrasBuscadas(palavrasBuscadas);
-    LiberaArrayBusca(arrayB);
 
     // FECHANDO ARQUIVO:
     fclose(fileBin);
