@@ -96,3 +96,8 @@ void CriaArrayDeBusca_Carac(Caracteristicas *crts, ArrayBusca *arrayB, IndiceDoc
 {
     CriaArrayDeBusca(arrayB, crts->posicao, crts->tf_idf, docs);
 }
+
+int ObtemPosicao(Caracteristicas *crts)
+{
+    return crts->posicao;
+}

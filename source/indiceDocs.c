@@ -53,7 +53,7 @@ IndiceDocs * AtribuiNomeClasseIndiceDocs(IndiceDocs *docs, char *caminho, char *
     return docs;
 }
 
-int ObtemQtdDocs(IndiceDocs *docs)
+int ObtemQtdDocumentos(IndiceDocs *docs)
 {
     return docs->qtdDocs;
 }

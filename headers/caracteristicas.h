@@ -28,4 +28,6 @@ void FinalizaCaracDocumentos_carac(Caracteristicas *crts, IndiceDocs *docs, int 
 
 void CriaArrayDeBusca_Carac(Caracteristicas *crts, ArrayBusca *arrayB, IndiceDocs *docs);
 
+int ObtemPosicao(Caracteristicas *crts);
+
 #endif

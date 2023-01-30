@@ -19,4 +19,8 @@ void LiberaDoc(Documento *doc);
 
 int DocsSaoIguais(Documento *doc1, Documento *doc2);
 
+Documento * InicializaDocumento();
+
+void ConstroiDocumento_classificador(Documento *doc, int posPalavra);
+
 #endif

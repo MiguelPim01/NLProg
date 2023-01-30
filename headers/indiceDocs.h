@@ -9,7 +9,7 @@ IndiceDocs * AtribuiNomeClasseIndiceDocs(IndiceDocs *docs, char *caminho, char *
 
 IndiceDocs * InicializaIndiceDocs(IndiceDocs *docs);
 
-int ObtemQtdDocs(IndiceDocs *docs);
+int ObtemQtdDocumentos(IndiceDocs *docs);
 
 void ImprimeDocs(IndiceDocs *docs);
 

@@ -198,3 +198,8 @@ void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs)
         CriaArrayDeBusca_Carac(p->crts[i], arrayB, docs);
     }
 }
+
+int ObtemQtdAparicoes(Palavra *p)
+{
+    return p->qtdAparicoes;
+}

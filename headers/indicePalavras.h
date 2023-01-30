@@ -35,4 +35,6 @@ void LiberaIndicePalavrasBuscadas(IndicePalavras *p);
 
 void CriaArrayDeBusca_IndxPalavras(IndicePalavras *p, ArrayBusca *arrayB, IndiceDocs *docs);
 
+int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra);
+
 #endif

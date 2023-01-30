@@ -218,3 +218,18 @@ void CriaArrayDeBusca_IndxPalavras(IndicePalavras *p, ArrayBusca *arrayB, Indice
         CriaArrayDeBusca_Palavra(p->arrayPalavras[i], arrayB, docs);
     }
 }
+
+int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra)
+{
+    int i = 0;
+
+    for (i = 0; i < p->qtdPalavras; i++)
+    {
+        if (p->arrayPalavras[i] == palavra)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}

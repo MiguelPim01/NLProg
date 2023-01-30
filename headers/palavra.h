@@ -36,4 +36,6 @@ void ImprimePalavra(Palavra *p);
 
 void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs);
 
+int ObtemQtdAparicoes(Palavra *p);
+
 #endif

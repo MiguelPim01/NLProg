@@ -6,6 +6,7 @@
 #include "headers/palavra.h"
 #include "headers/indicePalavras.h"
 #include "headers/arrayBusca.h"
+#include "headers/documento.h"
 
 int main(int argc, char *argv[])
 {
@@ -56,8 +57,10 @@ int main(int argc, char *argv[])
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
         
             printf("\nBusque algo: ");
+
             scanf("%[^\n]", texto);
             token = strtok(texto, " ");
+
             printf("\n");
 
             while (token)
@@ -79,6 +82,29 @@ int main(int argc, char *argv[])
             LiberaArrayBusca(arrayB);
             break;
         case '2': // CLASSIFICAR NOTICIA (30% nota)
+            Documento *noticiaDigitada = InicializaDocumento(); // documento a ser criado para classificao
+
+            printf("\nDigite uma Noticia: ");
+
+            scanf("%[^\n]", texto);
+            token = strtok(texto, " ");
+
+            printf("\n");
+
+            Palavra **p_buscada = NULL;
+            int posPalavra = 0;
+
+            while (token)
+            {
+                p_buscada = BuscaPalavra(RetornaArrayPalavras(indices), token);
+                posPalavra = RetornaIndiceDaPalavra(RetornaArrayPalavras(indices), *p_buscada);
+
+                ConstroiDocumento_classificador(noticiaDigitada, posPalavra);
+
+                token = strtok(NULL, " ");
+            } // Realiza a criacao do documento para a classificador de classe
+
+            LiberaDoc(noticiaDigitada);
             break;
         case '3': // RELATORIO DA PALAVRA (5% nota)
             break;
