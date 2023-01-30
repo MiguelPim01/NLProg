@@ -38,4 +38,8 @@ void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs);
 
 int ObtemQtdAparicoes(Palavra *p);
 
+char * ObtemPalavra(Palavra *p);
+
+void CriaDoc_classificador_palavra(Palavra *p, Documento *doc);
+
 #endif

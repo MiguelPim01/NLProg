@@ -178,14 +178,14 @@ Palavra * CarregaPalavraBin(Palavra *p, FILE *f)
 
 void ImprimePalavra(Palavra *p)
 {
-    // int i;
+    int i;
 
     printf("%s\n", p->palavra);
 
-    // for (i = 0; i < p->qtdAparicoes; i++)
-    // {
-    //     ImprimeCaracteristicas(p->crts[i]);
-    // }
+    for (i = 0; i < p->qtdAparicoes; i++)
+    {
+        ImprimeCaracteristicas(p->crts[i]);
+    }
 
 }
 
@@ -212,4 +212,14 @@ void CriaArrayDeBusca_Palavra(Palavra *p, ArrayBusca *arrayB, IndiceDocs *docs)
 int ObtemQtdAparicoes(Palavra *p)
 {
     return p->qtdAparicoes;
+}
+
+char * ObtemPalavra(Palavra *p)
+{
+    return p->palavra;
+}
+
+void CriaDoc_classificador_palavra(Palavra *p, Documento *doc)
+{
+    CriaDoc_classificador_carac(p->crts[p->qtdAparicoes-1], doc);
 }

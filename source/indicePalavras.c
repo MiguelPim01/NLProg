@@ -240,7 +240,7 @@ void ImprimePalavras(IndicePalavras *p)
         printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
     }
-    printf("    qtd: %d", p->qtdPalavras);
+    // printf("    qtd: %d", p->qtdPalavras);
 }
 
 void LiberaIndicePalavrasBuscadas(IndicePalavras *p)
@@ -270,4 +270,14 @@ int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra)
     }
 
     return -1;
+}
+
+void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc)
+{
+    int i;
+
+    for (i = 0; i < p_buscadas->qtdPalavras; i++)
+    {
+        CriaDoc_classificador_palavra(p_buscadas->arrayPalavras[i], doc);
+    }
 }

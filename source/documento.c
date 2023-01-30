@@ -43,7 +43,7 @@ Documento * AtribuiNomeClasse(Documento *doc, char *nome, char *classe)
 }
 
 void AtribuiCaracDoc(Documento *doc, int posPalavra, int freqPalavra, double tf_idf)
-{
+{   
     doc->qtdPalavras++;
     doc->crts = (Caracteristicas **)realloc(doc->crts, doc->qtdPalavras*sizeof(Caracteristicas *));
 
@@ -110,14 +110,14 @@ Documento * CarregaDocBin(Documento *doc, FILE *f)
 
 void ImprimeDoc(Documento *doc) 
 {
-    // int i;
+    int i;
 
     printf("nome: %s - classe: %s\n", doc->nome, doc->classe);
  
-    // for (i = 0; i < doc->qtdPalavras; i++)
-    // {
-    //     ImprimeCaracteristicas(doc->crts[i]);
-    // }
+    for (i = 0; i < doc->qtdPalavras; i++)
+    {
+        ImprimeCaracteristicas(doc->crts[i]);
+    }
 }
 
 void LiberaDoc(Documento *doc)
@@ -146,9 +146,11 @@ int DocsSaoIguais(Documento *doc1, Documento *doc2)
 
 Documento * InicializaDocumento_classificador()
 {
-    Documento *doc;
+    Documento *doc = NULL;
+    char nome[1], classe[4]={'0', '0', '0'};
+    nome[0]='\0';
 
-    doc = AlocaDocumento(TAMANHO_NOME_CLASSIFICADOR, TAMANHO_CLASSE_CLASSIFICADOR);
+    doc = AtribuiNomeClasse(doc, nome, classe);
 
     return doc;
 }

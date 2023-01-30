@@ -30,4 +30,10 @@ void CriaArrayDeBusca_Carac(Caracteristicas *crts, ArrayBusca *arrayB, IndiceDoc
 
 int ObtemPosicao(Caracteristicas *crts);
 
+int ObtemFrequencia(Caracteristicas *crts);
+
+double ObtemTF_IDF(Caracteristicas *crts);
+
+void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc);
+
 #endif
