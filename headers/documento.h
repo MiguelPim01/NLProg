@@ -25,4 +25,6 @@ double ObtemSomaTF_IDFs(Documento *doc);
 
 double CalculaCosseno(Documento *doc1, Documento *doc2, double somatorio_doc2);
 
+char * ObtemClasse(Documento *doc);
+
 #endif

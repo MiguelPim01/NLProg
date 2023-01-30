@@ -146,10 +146,62 @@ int OrdenaCossenos(const void *a, const void *b)
     return ((*cos2) - (*cos1));
 }
 
+char * DeduzClasse(int K, Documento **docs)
+{
+    char **VetorClasses = NULL, *classe = NULL;
+    int tamVetor = 0, flagAddChar = 0, *arrayCont = NULL, i, q;
+
+    for (i = 0; i < K; i++)
+    {
+        classe = ObtemClasse(docs[i]);
+
+        for (q = 0; q < tamVetor; q++)
+        {
+            if (VetorClasses[q] == classe)
+            {
+                flagAddChar = 1;
+                arrayCont[q]++;
+            }
+        }
+
+        if (flagAddChar == 0)
+        {
+            tamVetor++;
+
+            VetorClasses = (char **)realloc(VetorClasses, tamVetor*sizeof(char *));
+            arrayCont = (int *)realloc(arrayCont, tamVetor*sizeof(int));
+            
+            arrayCont[tamVetor-1] = 0;
+            VetorClasses[tamVetor-1] = classe;
+        }
+    }
+
+    int maior = 0;
+
+    for (i = 0; i < tamVetor; i++)
+    {
+        if (!i) maior = i;
+        else
+        {
+            if (arrayCont[i] > arrayCont[maior])
+            {
+                maior = i;
+            }
+        }
+    }
+    classe = VetorClasses[maior];
+
+    free(VetorClasses);
+    free(arrayCont);
+
+    return classe;
+}
+
 void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
 {
     double *AuxCossenos = (double *)malloc(docs->qtdDocs*sizeof(double));
     Documento **AuxClassificador = NULL;
+    char *classe;
 
     AuxClassificador = (Documento **)malloc(K*sizeof(Documento *));
 
@@ -168,6 +220,10 @@ void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
             }
         }
     }
+
+    classe = DeduzClasse(K, AuxClassificador);
+
+    printf("\nClasse Deduzida: %s\n", classe);
 
     free(AuxClassificador);
     free(AuxCossenos);

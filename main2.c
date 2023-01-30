@@ -87,6 +87,7 @@ int main(int argc, char *argv[])
             Documento *noticiaDigitada = InicializaDocumento_classificador(); 
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
             double *cossenos;
+            int K;
 
             printf("\nDigite uma Noticia: ");
 
@@ -108,7 +109,8 @@ int main(int argc, char *argv[])
 
             cossenos = CriaArrayCossenos(RetornaIndiceDocs(indices), noticiaDigitada);
 
-            
+            sscanf(argv[2], "%d", &K);
+            ClassificaNoticia(cossenos, RetornaIndiceDocs(indices), K);
 
             free(cossenos);
             LiberaDoc(noticiaDigitada);
