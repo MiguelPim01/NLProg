@@ -39,6 +39,6 @@ void CriaArrayDeBusca_IndxPalavras(IndicePalavras *p, ArrayBusca *arrayB, Indice
 
 int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra);
 
-void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc);
+void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc, IndicePalavras *p);
 
 #endif

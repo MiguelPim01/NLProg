@@ -154,3 +154,46 @@ Documento * InicializaDocumento_classificador()
 
     return doc;
 }
+
+double ObtemSomaTF_IDFs(Documento *doc)
+{
+    int i = 0;
+    double somatorio = 0;
+
+    for (i = 0; i < doc->qtdPalavras; i++)
+    {
+        somatorio = sqrt(pow(ObtemTF_IDF(doc->crts[i]), 2));
+    }
+
+    return somatorio;
+}
+
+double CalculaCosseno(Documento *doc1, Documento *doc2, double somatorio_doc2)
+{
+    double somatorio_doc1 = ObtemSomaTF_IDFs(doc1);
+    double soma_numerador = 0, resultado = 0, denominador = 0;
+
+    int i = 0, q = 0;
+
+    for (i = 0 ; i < doc1->qtdPalavras; i++)
+    {
+        for (q = 0; q < doc2->qtdPalavras; q++)
+        {
+            if (ObtemPosicao(doc1->crts[i]) == ObtemPosicao(doc2->crts[q]))
+            {
+                soma_numerador += (ObtemTF_IDF(doc1->crts[i])*ObtemTF_IDF(doc2->crts[q]));
+            }
+        }
+    }
+
+    denominador = somatorio_doc1*somatorio_doc2;
+
+    if (denominador == 0)
+    {
+        return 0;
+    }
+
+    resultado = soma_numerador/denominador;
+
+    return resultado;
+}

@@ -7,8 +7,6 @@
 #include "../headers/documento.h"
 #include "../headers/arrayBusca.h"
 
-#define POS_PALAVRA_CLASSIFICADOR -1
-
 struct caracteristicas {
     int posicao, frequencia;
     double tf_idf;
@@ -114,7 +112,7 @@ double ObtemTF_IDF(Caracteristicas *crts)
     return crts->tf_idf;
 }
 
-void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc)
+void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc, int indicePalavra)
 {
-    AtribuiCaracDoc(doc, POS_PALAVRA_CLASSIFICADOR, crts->frequencia, crts->tf_idf);
+    AtribuiCaracDoc(doc, indicePalavra, crts->frequencia, crts->tf_idf);
 }

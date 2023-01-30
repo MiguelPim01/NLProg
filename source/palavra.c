@@ -219,7 +219,7 @@ char * ObtemPalavra(Palavra *p)
     return p->palavra;
 }
 
-void CriaDoc_classificador_palavra(Palavra *p, Documento *doc)
+void CriaDoc_classificador_palavra(Palavra *p, Documento *doc, int indicePalavra)
 {
-    CriaDoc_classificador_carac(p->crts[p->qtdAparicoes-1], doc);
+    CriaDoc_classificador_carac(p->crts[p->qtdAparicoes-1], doc, indicePalavra);
 }

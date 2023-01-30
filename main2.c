@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
         case '2': // CLASSIFICAR NOTICIA (30% nota)
             Documento *noticiaDigitada = InicializaDocumento_classificador(); 
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
+            double *cossenos;
 
             printf("\nDigite uma Noticia: ");
 
@@ -103,10 +104,13 @@ int main(int argc, char *argv[])
 
             AtribuiTf_idfIdxPalavras(RetornaArrayPalavras(indices), RetornaIndiceDocs(indices), FLAG_CLASSIFICADOR);
 
-            CriaDoc_classificador_indPalavras(palavrasBuscadas, noticiaDigitada);
+            CriaDoc_classificador_indPalavras(palavrasBuscadas, noticiaDigitada, RetornaArrayPalavras(indices));
 
-            ImprimeDoc(noticiaDigitada);
+            cossenos = CriaArrayCossenos(RetornaIndiceDocs(indices), noticiaDigitada);
 
+            
+
+            free(cossenos);
             LiberaDoc(noticiaDigitada);
             LiberaIndicePalavrasBuscadas(palavrasBuscadas);
             break;

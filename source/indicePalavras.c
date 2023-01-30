@@ -272,12 +272,14 @@ int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra)
     return -1;
 }
 
-void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc)
+void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc, IndicePalavras *p)
 {
-    int i;
+    int i, indicePalavra = 0;
 
     for (i = 0; i < p_buscadas->qtdPalavras; i++)
     {
-        CriaDoc_classificador_palavra(p_buscadas->arrayPalavras[i], doc);
+        indicePalavra = RetornaIndiceDaPalavra(p, p_buscadas->arrayPalavras[i]);
+
+        CriaDoc_classificador_palavra(p_buscadas->arrayPalavras[i], doc, indicePalavra);
     }
 }

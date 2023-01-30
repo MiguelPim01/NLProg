@@ -110,3 +110,65 @@ void LiberaIndiceDocs(IndiceDocs *docs)
     free(docs->arrayDocs);
     free(docs);
 }
+
+double * CriaArrayCossenos(IndiceDocs *docs, Documento *doc)
+{
+    int i = 0;
+    double *cossenos, somatorio = 0;
+
+    somatorio = ObtemSomaTF_IDFs(doc);
+
+    cossenos = (double *)malloc(docs->qtdDocs*sizeof(double));
+
+    for (i = 0; i < docs->qtdDocs; i++)
+    {
+        cossenos[i] = CalculaCosseno(docs->arrayDocs[i], doc, somatorio);
+    }
+
+    return cossenos;
+}
+
+void AtribuiArrayDouble(double *a, double *b, int tam)
+{
+    int i;
+
+    for (i = 0; i < tam; i++)
+    {
+        b[i] = a[i];
+    }
+}
+
+int OrdenaCossenos(const void *a, const void *b)
+{
+    double *cos1 = (double *)a;
+    double *cos2 = (double *)b;
+
+    return ((*cos2) - (*cos1));
+}
+
+void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
+{
+    double *AuxCossenos = (double *)malloc(docs->qtdDocs*sizeof(double));
+    Documento **AuxClassificador = NULL;
+
+    AuxClassificador = (Documento **)malloc(K*sizeof(Documento *));
+
+    AtribuiArrayDouble(cossenos, AuxCossenos, docs->qtdDocs);
+    qsort(AuxCossenos, docs->qtdDocs, sizeof(double), OrdenaCossenos);
+
+    int i, q;
+
+    for (i = 0; i < K; i++)
+    {
+        for (q = 0; q < docs->qtdDocs; q++)
+        {
+            if (AuxCossenos[i] == cossenos[q])
+            {
+                AuxClassificador[i] = docs->arrayDocs[q];
+            }
+        }
+    }
+
+    free(AuxClassificador);
+    free(AuxCossenos);
+}

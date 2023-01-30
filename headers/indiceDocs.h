@@ -21,4 +21,12 @@ IndiceDocs * CarregaIndiceDocsBin(IndiceDocs *docs, FILE *f);
 
 void LiberaIndiceDocs(IndiceDocs *docs);
 
+double * CriaArrayCossenos(IndiceDocs *docs, Documento *doc);
+
+void AtribuiArrayDouble(double *a, double *b, int tam);
+
+int OrdenaCossenos(const void *a, const void *b);
+
+void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K);
+
 #endif

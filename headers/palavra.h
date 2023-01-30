@@ -40,6 +40,6 @@ int ObtemQtdAparicoes(Palavra *p);
 
 char * ObtemPalavra(Palavra *p);
 
-void CriaDoc_classificador_palavra(Palavra *p, Documento *doc);
+void CriaDoc_classificador_palavra(Palavra *p, Documento *doc, int indicePalavra);
 
 #endif

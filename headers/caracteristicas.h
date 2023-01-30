@@ -34,6 +34,6 @@ int ObtemFrequencia(Caracteristicas *crts);
 
 double ObtemTF_IDF(Caracteristicas *crts);
 
-void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc);
+void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc, int indicePalavra);
 
 #endif
