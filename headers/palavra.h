@@ -22,7 +22,7 @@ int ComparaPalavras(Palavra *p, char *palavra);
 
 int PelaPalavra(const void *a, const void *b);
 
-void AtribuiTf_idfPalavra(Palavra *p, int n);
+void AtribuiTf_idfPalavra(Palavra *p, IndiceDocs *docs, int flagClassificador);
 
 void FinalizaCaracDocumentos_palavras(Palavra *p, IndiceDocs *docs, int posPalavra);
 

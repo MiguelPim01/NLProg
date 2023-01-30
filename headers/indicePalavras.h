@@ -9,6 +9,8 @@ IndicePalavras * InicializaIndicePalavras(IndicePalavras *palavras);
 
 void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, char *palavra);
 
+void CriaIndicePalavras_classificador(IndicePalavras *palavrasDigitadas, IndicePalavras *p, char *palavra, IndiceDocs *docs);
+
 IndicePalavras * AlocaIdxPalavras();
 
 IndicePalavras * AtribuiIndicePalavras(IndicePalavras *p, int nDoc, char *caminhoAux);
@@ -17,7 +19,7 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra);
 
 void LiberaIndicePalavras(IndicePalavras *p);
 
-void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs);
+void AtribuiTf_idfIdxPalavras(IndicePalavras *p, IndiceDocs *docs, int flagClassificador);
 
 void SalvaIndicePalavrasBin(IndicePalavras *p, FILE *f);
 

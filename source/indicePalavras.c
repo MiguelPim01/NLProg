@@ -37,19 +37,57 @@ void AdicionaPalavraBuscada(IndicePalavras *arrayDeBusca, IndicePalavras *p, cha
 {
     static int mult = QTD_INICIAL_ALLOC;
     Palavra **p_buscada = NULL;
+    int rtnRepetida = 0;
 
     p_buscada = BuscaPalavra(p, palavra);
 
-    if (p_buscada != NULL)
-    {   
-        if (arrayDeBusca->qtdPalavras >= mult)
-        {
-            mult *= 2;
-            arrayDeBusca->arrayPalavras = (Palavra **)realloc(arrayDeBusca->arrayPalavras, mult*sizeof(Palavra *));
-        }
+    rtnRepetida = ProcuraRepetida(arrayDeBusca, palavra);
 
-        arrayDeBusca->arrayPalavras[arrayDeBusca->qtdPalavras] = *p_buscada;
-        arrayDeBusca->qtdPalavras++;
+    if (rtnRepetida == -1)
+    {
+        if (p_buscada != NULL)
+        {   
+            if (arrayDeBusca->qtdPalavras >= mult)
+            {
+                mult *= 2;
+                arrayDeBusca->arrayPalavras = (Palavra **)realloc(arrayDeBusca->arrayPalavras, mult*sizeof(Palavra *));
+            }
+
+            arrayDeBusca->arrayPalavras[arrayDeBusca->qtdPalavras] = *p_buscada;
+            arrayDeBusca->qtdPalavras++;
+        }
+    }
+}
+
+void CriaIndicePalavras_classificador(IndicePalavras *palavrasDigitadas, IndicePalavras *p, char *palavra, IndiceDocs *docs)
+{
+    static int mult = QTD_INICIAL_ALLOC;
+    Palavra **p_buscada = NULL;
+    int rtnRepetida = 0;
+
+    p_buscada = BuscaPalavra(p, palavra);
+
+    rtnRepetida = ProcuraRepetida(palavrasDigitadas, palavra);
+
+    if (rtnRepetida != -1)
+    {
+        palavrasDigitadas->arrayPalavras[rtnRepetida] = AdicionaFrequencia(palavrasDigitadas->arrayPalavras[rtnRepetida], ObtemQtdDocumentos(docs)+1);
+    }
+    else 
+    {
+        if (p_buscada != NULL)
+        {   
+            if (palavrasDigitadas->qtdPalavras >= mult)
+            {
+                mult *= 2;
+                palavrasDigitadas->arrayPalavras = (Palavra **)realloc(palavrasDigitadas->arrayPalavras, mult*sizeof(Palavra *));
+            }
+
+            palavrasDigitadas->arrayPalavras[palavrasDigitadas->qtdPalavras] = *p_buscada;
+            palavrasDigitadas->arrayPalavras[palavrasDigitadas->qtdPalavras] = AdicionaFrequencia(palavrasDigitadas->arrayPalavras[palavrasDigitadas->qtdPalavras], ObtemQtdDocumentos(docs)+1);
+
+            palavrasDigitadas->qtdPalavras++;
+        }
     }
 }
 
@@ -119,13 +157,13 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
     return -1;
 }
 
-void AtribuiTf_idfIdxPalavras(IndicePalavras *p, int qtdDocs)
+void AtribuiTf_idfIdxPalavras(IndicePalavras *p, IndiceDocs *docs, int flagClassificador)
 {
     int i;
 
     for (i = 0; i < p->qtdPalavras; i++)
     {
-        AtribuiTf_idfPalavra(p->arrayPalavras[i], qtdDocs);
+        AtribuiTf_idfPalavra(p->arrayPalavras[i], docs, flagClassificador);
     }
 }
 

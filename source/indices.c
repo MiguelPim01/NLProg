@@ -6,6 +6,8 @@
 #include "../headers/indiceDocs.h"
 #include "../headers/indicePalavras.h"
 
+#define FLAG_CLASSIFICADOR 0
+
 struct indices {
     IndiceDocs *docs;
     IndicePalavras *palavras;
@@ -50,7 +52,7 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
         contDocs++;
     }
 
-    AtribuiTf_idfIdxPalavras(i->palavras, contDocs);
+    AtribuiTf_idfIdxPalavras(i->palavras, i->docs, FLAG_CLASSIFICADOR);
 
     OrdenaIndicePalavras(i->palavras);
 

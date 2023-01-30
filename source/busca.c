@@ -34,7 +34,7 @@ int PeloTF_IDF(const void *a, const void *b)
     const Busca **b1 = (const Busca **)a;
     const Busca **b2 = (const Busca **)b;
 
-    return ((*b1)->somatorio_tf_idf - (*b2)->somatorio_tf_idf);
+    return ((*b2)->somatorio_tf_idf - (*b1)->somatorio_tf_idf);
 }
 
 void PrintaBusca(Busca *b)

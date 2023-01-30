@@ -62,17 +62,21 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
 
 Palavra * AdicionaFrequencia(Palavra *p, int nDoc)
 {
-    if (VerificaSeAddFrequencia(p->crts[p->qtdAparicoes-1], nDoc))
+    int i = 0;
+
+    for (i = 0 ; i < p->qtdAparicoes; i++)
     {
-        p->crts[p->qtdAparicoes-1] = SomaNaFrequencia(p->crts[p->qtdAparicoes-1]);
+        if (VerificaSeAddFrequencia(p->crts[i], nDoc))
+        {
+            p->crts[i] = SomaNaFrequencia(p->crts[i]);
+            return p;
+        }
     }
-    else 
-    {
-        p->qtdAparicoes++;
-        
-        p->crts = (Caracteristicas **)realloc(p->crts, p->qtdAparicoes*sizeof(Caracteristicas *));
-        p->crts[p->qtdAparicoes-1] = InicializaCaracteristicas(p->crts[p->qtdAparicoes-1], nDoc, FREQ_INICIAL, TF_IDF_PADRAO);
-    }
+    
+    p->qtdAparicoes++;
+            
+    p->crts = (Caracteristicas **)realloc(p->crts, p->qtdAparicoes*sizeof(Caracteristicas *));
+    p->crts[p->qtdAparicoes-1] = InicializaCaracteristicas(p->crts[p->qtdAparicoes-1], nDoc, FREQ_INICIAL, TF_IDF_PADRAO);
     
     return p;
 }
@@ -95,12 +99,18 @@ int PelaPalavra(const void *a, const void *b)
     return strcmp((*p1)->palavra, (*p2)->palavra);
 }
 
-void AtribuiTf_idfPalavra(Palavra *p, int n)
+void AtribuiTf_idfPalavra(Palavra *p, IndiceDocs *docs, int flagClassificador)
 {
-    int i = 0;
+    int i = 0, docsTotais = 0, docsAparicao = 0;
     double idf = 0;
 
-    idf = log((double)(1+n)/(double)(1+p->qtdAparicoes))+1;
+    if (flagClassificador)
+    {
+        docsTotais = ObtemQtdDocumentos(docs) + 1;
+        docsAparicao = p->qtdAparicoes + 1;
+    }
+
+    idf = log(((double)(1+docsTotais))/((double)(1+docsAparicao))) + 1;
 
     for (i = 0; i < p->qtdAparicoes; i++)
     {

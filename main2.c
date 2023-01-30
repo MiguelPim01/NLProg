@@ -8,6 +8,8 @@
 #include "headers/arrayBusca.h"
 #include "headers/documento.h"
 
+#define FLAG_CLASSIFICADOR 1
+
 int main(int argc, char *argv[])
 {
     FILE *fileBin;
@@ -82,7 +84,7 @@ int main(int argc, char *argv[])
             LiberaArrayBusca(arrayB);
             break;
         case '2': // CLASSIFICAR NOTICIA (30% nota)
-            Documento *noticiaDigitada = InicializaDocumento(); // documento a ser criado para classificao
+            palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
 
             printf("\nDigite uma Noticia: ");
 
@@ -91,20 +93,18 @@ int main(int argc, char *argv[])
 
             printf("\n");
 
-            Palavra **p_buscada = NULL;
-            int posPalavra = 0;
-
             while (token)
             {
-                p_buscada = BuscaPalavra(RetornaArrayPalavras(indices), token);
-                posPalavra = RetornaIndiceDaPalavra(RetornaArrayPalavras(indices), *p_buscada);
-
-                ConstroiDocumento_classificador(noticiaDigitada, posPalavra);
+                CriaIndicePalavras_classificador(palavrasBuscadas, RetornaArrayPalavras(indices), token, RetornaIndiceDocs(indices));
 
                 token = strtok(NULL, " ");
             } // Realiza a criacao do documento para a classificador de classe
 
-            LiberaDoc(noticiaDigitada);
+            AtribuiTf_idfIdxPalavras(RetornaArrayPalavras(indices), RetornaIndiceDocs(indices), FLAG_CLASSIFICADOR);
+
+            
+
+            LiberaIndicePalavrasBuscadas(palavrasBuscadas);
             break;
         case '3': // RELATORIO DA PALAVRA (5% nota)
             break;

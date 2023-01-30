@@ -144,32 +144,11 @@ int DocsSaoIguais(Documento *doc1, Documento *doc2)
     return 0;
 }
 
-Documento * InicializaDocumento()
+Documento * InicializaDocumento_classificador()
 {
     Documento *doc;
 
     doc = AlocaDocumento(TAMANHO_NOME_CLASSIFICADOR, TAMANHO_CLASSE_CLASSIFICADOR);
 
     return doc;
-}
-
-void ConstroiDocumento_classificador(Documento *doc, int posPalavra)
-{
-    for (int i = 0; i < doc->qtdPalavras; i++)
-    {
-        if (ObtemPosicao(doc->crts[i]) == posPalavra)
-        {
-            SomaNaFrequencia(doc->crts[i]);
-            return;
-        }
-    }
-
-    // idf = log((double)(1 + (nDocs+1) )/(double)(1 + (ObtemQtdDocs(*p_buscada)+1) ))+1;
-
-    AtribuiCaracDoc(doc, posPalavra, FREQUENCIA_DEFAULT_CLASSIFICADOR, TF_IDF_DEFAULT_CLASSIFICADOR);
-}
-
-void AtribuiTF_IDF_classificador(Documento *doc)
-{
-
 }
