@@ -174,6 +174,8 @@ char * DeduzClasse(int K, Documento **docs)
             arrayCont[tamVetor-1] = 0;
             VetorClasses[tamVetor-1] = classe;
         }
+
+        flagAddChar = 0;
     }
 
     int maior = 0;
