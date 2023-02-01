@@ -146,6 +146,14 @@ int OrdenaCossenos(const void *a, const void *b)
     return ((*cos2) - (*cos1));
 }
 
+int OrdenaStrings(const void *a, const void *b)
+{
+    const char **classe1 = (const char **)a;
+    const char **classe2 = (const char **)b;
+
+    return strcmp(*(classe1), *(classe2));
+}
+
 char * DeduzClasse(int K, Documento **docs)
 {
     char **VetorClasses = NULL, *classe = NULL;
@@ -199,11 +207,16 @@ char * DeduzClasse(int K, Documento **docs)
     return classe;
 }
 
-void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
+char * ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
 {
     double *AuxCossenos = (double *)malloc(docs->qtdDocs*sizeof(double));
     Documento **AuxClassificador = NULL;
     char *classe;
+
+    if (K > docs->qtdDocs)
+    {
+        K = docs->qtdDocs;
+    }
 
     AuxClassificador = (Documento **)malloc(K*sizeof(Documento *));
 
@@ -225,10 +238,10 @@ void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
 
     classe = DeduzClasse(K, AuxClassificador);
 
-    printf("\nClasse Deduzida: %s\n", classe);
-
     free(AuxClassificador);
     free(AuxCossenos);
+
+    return classe;
 }
 
 IndiceDocs * CopiaIndiceDocs(IndiceDocs *docs, IndiceDocs *Rdocs)
@@ -298,4 +311,45 @@ void ImprimeDocsPorIndice(IndiceDocs *docs, int *arrayIndicesInt)
         printf("\n");
         i++;
     }
+}
+
+char ** CriaArrayClassesDeduzidas(IndiceDocs *docsTrain, IndiceDocs *docsTeste, int K)
+{
+    char **arrayClassesDeduzidas = NULL, *classe = NULL;
+    double *cossenos = NULL;
+    int i;
+
+    arrayClassesDeduzidas = (char **)malloc(docsTeste->qtdDocs*sizeof(char *));
+
+    for (i = 0; i < docsTeste->qtdDocs; i++)
+    {
+        cossenos = CriaArrayCossenos(docsTrain, docsTeste->arrayDocs[i]);
+        classe = ClassificaNoticia(cossenos, docsTrain, K);
+
+        arrayClassesDeduzidas[i] = classe;
+        free(cossenos);
+    }
+
+    qsort(arrayClassesDeduzidas, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
+
+    return arrayClassesDeduzidas;
+}
+
+char ** CriaArrayClassesVerdadeiras(IndiceDocs *docsTeste, int K)
+{
+    char **arrayClassesVerdadeiras = NULL, *classe = NULL;
+    int i;
+
+    arrayClassesVerdadeiras = (char **)malloc(docsTeste->qtdDocs*sizeof(char *));
+
+    for (i = 0; i < docsTeste->qtdDocs; i++)
+    {
+        classe = ObtemClasse(docsTeste->arrayDocs[i]);
+
+        arrayClassesVerdadeiras[i] = classe;
+    }
+
+    qsort(arrayClassesVerdadeiras, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
+
+    return arrayClassesVerdadeiras;
 }

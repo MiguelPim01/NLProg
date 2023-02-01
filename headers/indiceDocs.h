@@ -27,7 +27,9 @@ void AtribuiArrayDouble(double *a, double *b, int tam);
 
 int OrdenaCossenos(const void *a, const void *b);
 
-void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K);
+int OrdenaStrings(const void *a, const void *b);
+
+char * ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K);
 
 IndiceDocs * CopiaIndiceDocs(IndiceDocs *docs, IndiceDocs *Rdocs);
 
@@ -38,5 +40,9 @@ void OrdenaRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 
 void ImprimeDocsPorIndice(IndiceDocs *docs, int *arrayIndicesInt);
+
+char ** CriaArrayClassesDeduzidas(IndiceDocs *docsTrain, IndiceDocs *docsTeste, int K);
+
+char ** CriaArrayClassesVerdadeiras(IndiceDocs *docsTeste, int K);
 
 #endif
