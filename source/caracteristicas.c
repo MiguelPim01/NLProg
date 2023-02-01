@@ -116,3 +116,28 @@ void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc, int indi
 {
     AtribuiCaracDoc(doc, indicePalavra, crts->frequencia, crts->tf_idf);
 }
+
+void CopiaCaracDoc(Caracteristicas *crts, Documento *Rdoc)
+{
+    AtribuiCaracDoc(Rdoc, crts->posicao, crts->frequencia, crts->tf_idf);
+}
+
+int RetornaFrequencia(Caracteristicas *crts)
+{
+    return crts->frequencia;
+}
+
+Caracteristicas * CopiaCarac(Caracteristicas *crts, Caracteristicas *Rcrts)
+{
+    Rcrts = InicializaCaracteristicas(Rcrts, crts->posicao, crts->frequencia, crts->tf_idf);
+
+    return Rcrts;
+}
+
+int PelaFrequencia(const void *a, const void *b)
+{
+    const Caracteristicas **crtsA = (const Caracteristicas **)a;
+    const Caracteristicas **crtsB = (const Caracteristicas **)b;
+
+    return (*crtsB)->frequencia - (*crtsA)->frequencia;
+}

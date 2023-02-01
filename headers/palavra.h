@@ -8,7 +8,7 @@
 
 typedef struct palavra Palavra;
 
-Palavra * AlocaPalavra(char *palavra, int tamPalavra);
+Palavra * AlocaPalavra(int tamPalavra);
 
 Palavra * AlocaPalavra_auxBusca(char *palavra);
 
@@ -41,5 +41,11 @@ int ObtemQtdAparicoes(Palavra *p);
 char * ObtemPalavra(Palavra *p);
 
 void CriaDoc_classificador_palavra(Palavra *p, Documento *doc, int indicePalavra);
+
+int StringIgualPalavra(Palavra *p, char *palavra);
+
+void RelatorioPalavra(Palavra *p, char *palavra);
+
+Palavra * CopiaPalavra(Palavra *p, Palavra *Rp);
 
 #endif

@@ -15,6 +15,7 @@ struct documento {
     char *nome, *classe;
     Caracteristicas **crts;
     int qtdPalavras;
+    int somaFreq;
 };
 
 Documento * AlocaDocumento(int tamNome, int tamClasse)
@@ -25,6 +26,7 @@ Documento * AlocaDocumento(int tamNome, int tamClasse)
     doc->classe = (char *)malloc(tamClasse*sizeof(char));
     doc->crts = NULL;
     doc->qtdPalavras = 0;
+    doc->somaFreq = 0;
 
     return doc;
 }
@@ -110,14 +112,12 @@ Documento * CarregaDocBin(Documento *doc, FILE *f)
 
 void ImprimeDoc(Documento *doc) 
 {
-    // int i;
-
-    printf("nome: %s - classe: %s\n", doc->nome, doc->classe);
+    printf("Nome: %s\nNúmero de palavras: %d\nClasse: %s\n", doc->nome, doc->somaFreq, doc->classe);
  
-    // for (i = 0; i < doc->qtdPalavras; i++)
-    // {
-    //     ImprimeCaracteristicas(doc->crts[i]);
-    // }
+    /*for (int i = 0; i < doc->qtdPalavras; i++)
+    {
+         ImprimeCaracteristicas(doc->crts[i]);
+    }*/
 }
 
 void LiberaDoc(Documento *doc)
@@ -201,4 +201,49 @@ double CalculaCosseno(Documento *doc1, Documento *doc2, double somatorio_doc2)
 char * ObtemClasse(Documento *doc)
 {
     return doc->classe;
+}
+
+Documento * CopiaDoc(Documento *doc, Documento *Rdoc)
+{
+    Rdoc = AtribuiNomeClasse(Rdoc, doc->nome, doc->classe);
+
+    for (int i = 1; i <= doc->qtdPalavras; i++)
+    {
+        CopiaCaracDoc(doc->crts[i-1], Rdoc);
+    }
+
+    return Rdoc;
+}
+
+void AtribuiSomaDasFrequencias_Doc(Documento *doc, Documento *Rdoc)
+{
+    Rdoc->somaFreq = SomaFrequenciasDoc(doc);
+}
+
+int SomaFrequenciasDoc(Documento *doc)
+{
+    int i, soma = 0;
+
+    for (i = 0; i < doc->qtdPalavras; i++)
+    {
+        soma += RetornaFrequencia(doc->crts[i]);   
+    }
+
+    return soma;
+}
+
+int PelaSomaFrequenciaCresc(const void *a, const void *b)
+{
+    const Documento **doc1 = (const Documento **)a;
+    const Documento **doc2 = (const Documento **)b;
+
+    return (*doc1)->somaFreq - (*doc2)->somaFreq;
+}
+
+int PelaSomaFrequenciaDecresc(const void *a, const void *b)
+{
+    const Documento **doc1 = (const Documento **)a;
+    const Documento **doc2 = (const Documento **)b;
+
+    return (*doc2)->somaFreq - (*doc1)->somaFreq;
 }

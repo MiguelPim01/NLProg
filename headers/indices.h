@@ -16,8 +16,12 @@ Indices * CarregaIndicesBin(Indices *i, FILE *f);
 
 void LiberaIndices(Indices *i);
 
-IndicePalavras * RetornaArrayPalavras(Indices *i);
+IndicePalavras * RetornaIndicePalavras(Indices *i);
 
 IndiceDocs * RetornaIndiceDocs(Indices *i);
+
+void GeraRelatorioPalavra(Indices *i, char *palavra);
+
+void GeraRelatorioDocs(Indices *i, IndiceDocs *Rdocs);
 
 #endif

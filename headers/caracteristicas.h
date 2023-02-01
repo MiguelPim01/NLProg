@@ -36,4 +36,12 @@ double ObtemTF_IDF(Caracteristicas *crts);
 
 void CriaDoc_classificador_carac(Caracteristicas *crts, Documento *doc, int indicePalavra);
 
+void CopiaCaracDoc(Caracteristicas *crts, Documento *Rdoc);
+
+Caracteristicas * CopiaCarac(Caracteristicas *crts, Caracteristicas *Rcrts);
+
+int RetornaFrequencia(Caracteristicas *crts);
+
+int PelaFrequencia(const void *a, const void *b);
+
 #endif

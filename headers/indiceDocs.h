@@ -29,4 +29,12 @@ int OrdenaCossenos(const void *a, const void *b);
 
 void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K);
 
+IndiceDocs * CopiaIndiceDocs(IndiceDocs *docs, IndiceDocs *Rdocs);
+
+void AtribuiSomaDasFrequencias_Indice(IndiceDocs *docs, IndiceDocs *Rdocs);
+
+void OrdenaRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
+
+void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
+
 #endif

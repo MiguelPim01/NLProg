@@ -9,6 +9,7 @@
         "uteis.h": "c",
         "stdio.h": "c",
         "indices.h": "c",
-        "caracteristicas.h": "c"
+        "caracteristicas.h": "c",
+        "arraybusca.h": "c"
     }
 }

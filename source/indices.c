@@ -7,6 +7,8 @@
 #include "../headers/indicePalavras.h"
 
 #define FLAG_CLASSIFICADOR 0
+#define DECRESC 0
+#define CRESC 1
 
 struct indices {
     IndiceDocs *docs;
@@ -88,7 +90,7 @@ void LiberaIndices(Indices *i)
     free(i);
 }
 
-IndicePalavras * RetornaArrayPalavras(Indices *i)
+IndicePalavras * RetornaIndicePalavras(Indices *i)
 {
     return i->palavras;
 }
@@ -96,4 +98,22 @@ IndicePalavras * RetornaArrayPalavras(Indices *i)
 IndiceDocs * RetornaIndiceDocs(Indices *i)
 {
     return i->docs;
+}
+
+void GeraRelatorioDocs(Indices *i, IndiceDocs *Rdocs)
+{
+    Rdocs = CopiaIndiceDocs(i->docs, Rdocs);
+
+    AtribuiSomaDasFrequencias_Indice(i->docs, Rdocs);
+
+    OrdenaRelatorioDocs(Rdocs, CRESC);
+    ImprimeRelatorioDocs(Rdocs, CRESC);
+
+    OrdenaRelatorioDocs(Rdocs, DECRESC);
+    ImprimeRelatorioDocs(Rdocs, DECRESC);
+}
+
+void GeraRelatorioPalavra(Indices *i, char *palavra)
+{
+    RelatorioPalavra_indxPalavra(i->palavras, palavra);
 }

@@ -230,3 +230,58 @@ void ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K)
     free(AuxClassificador);
     free(AuxCossenos);
 }
+
+IndiceDocs * CopiaIndiceDocs(IndiceDocs *docs, IndiceDocs *Rdocs)
+{
+    int mult = 10;
+
+    for (int i = 0; i < docs->qtdDocs; i++)
+    {
+        Rdocs->arrayDocs[i] = CopiaDoc(docs->arrayDocs[i], Rdocs->arrayDocs[i]);
+        Rdocs->qtdDocs++;
+
+        if (Rdocs->qtdDocs >= mult)
+        {
+            mult *=2;
+            Rdocs->arrayDocs = (Documento **)realloc(Rdocs->arrayDocs, mult*sizeof(Documento *));
+        }
+    }
+
+    return Rdocs;
+}
+
+void AtribuiSomaDasFrequencias_Indice(IndiceDocs *docs, IndiceDocs *Rdocs)
+{
+    for (int i = 0; i < docs->qtdDocs; i++)
+    {
+        AtribuiSomaDasFrequencias_Doc(docs->arrayDocs[i], Rdocs->arrayDocs[i]);
+    }
+}
+
+void OrdenaRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem)
+{
+    if (flagOrdem)
+    {
+        qsort(Rdocs->arrayDocs, Rdocs->qtdDocs, sizeof(Documento *), PelaSomaFrequenciaCresc);
+    } else {
+        qsort(Rdocs->arrayDocs, Rdocs->qtdDocs, sizeof(Documento *), PelaSomaFrequenciaDecresc);
+    }
+}
+
+void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem)
+{
+    if (flagOrdem)
+    {
+        printf("\nDOCUMENTOS MAIS CURTOS:\n\n");
+    } else {
+        printf("\nDOCUMENTOS MAIS LONGOS:\n\n");
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d - ", i+1);
+        ImprimeDoc(Rdocs->arrayDocs[i]);
+        printf("\n");
+    }
+    printf("-----------------------------\n");
+}

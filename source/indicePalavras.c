@@ -153,7 +153,7 @@ int ProcuraRepetida(IndicePalavras *p, char *palavra)
         {
             return i;
         }
-    }
+     }
     return -1;
 }
 
@@ -281,5 +281,24 @@ void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *do
         indicePalavra = RetornaIndiceDaPalavra(p, p_buscadas->arrayPalavras[i]);
 
         CriaDoc_classificador_palavra(p_buscadas->arrayPalavras[i], doc, indicePalavra);
+    }
+}
+
+void RelatorioPalavra_indxPalavra(IndicePalavras *p, char *palavra)
+{
+    int flag = 0;
+
+    for (int i = 0; i < p->qtdPalavras; i++)
+    {
+        if (StringIgualPalavra(p->arrayPalavras[i], palavra))
+        {
+            RelatorioPalavra(p->arrayPalavras[i], palavra);
+            flag = 1;
+        }
+    }
+
+    if (!flag)
+    {
+        printf("A palavra ""%s"" não existe no índice de palavras.\n", palavra);
     }
 }

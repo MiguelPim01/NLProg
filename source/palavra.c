@@ -17,12 +17,13 @@ struct palavra {
     int qtdAparicoes;
 };
 
-Palavra * AlocaPalavra(char *palavra, int tamPalavra)
+Palavra * AlocaPalavra(int tamPalavra)
 {
     Palavra *p = (Palavra *)malloc(sizeof(Palavra));
 
     p->crts = (Caracteristicas **)malloc(sizeof(Caracteristicas *));
     p->palavra = (char *)malloc(tamPalavra*sizeof(char));
+    p->qtdAparicoes = 0;
 
     return p;
 }
@@ -49,7 +50,7 @@ Palavra * InicializaPalavra(Palavra *p, char *palavra, int nDoc)
 {
     int tamPalavra = strlen(palavra)+1;
     
-    p = AlocaPalavra(palavra, tamPalavra);
+    p = AlocaPalavra(tamPalavra);
 
     p->crts[0] = InicializaCaracteristicas(p->crts[0], nDoc, FREQ_INICIAL, TF_IDF_PADRAO);
 
@@ -222,4 +223,43 @@ char * ObtemPalavra(Palavra *p)
 void CriaDoc_classificador_palavra(Palavra *p, Documento *doc, int indicePalavra)
 {
     CriaDoc_classificador_carac(p->crts[p->qtdAparicoes-1], doc, indicePalavra);
+}
+
+int StringIgualPalavra(Palavra *p, char *palavra)
+{
+    return !strncmp(p->palavra, palavra, strlen(palavra)+1);
+}
+
+void RelatorioPalavra(Palavra *p, char *palavra)
+{
+    Palavra *Rp = AlocaPalavra(strlen(palavra)+1);
+
+    Rp = CopiaPalavra(p, Rp);
+
+    printf("\nNúmero de documentos em que ""%s"" aparece: %d\n", Rp->palavra, Rp->qtdAparicoes);
+
+    qsort(Rp->crts, Rp->qtdAparicoes, sizeof(Caracteristicas *), PelaFrequencia);
+
+    for (int i = 0; i < 10 && i < Rp->qtdAparicoes; i++)
+    {
+        ImprimeCaracteristicas(Rp->crts[i]);
+    }
+
+    LiberaPalavra(Rp);
+}
+
+Palavra * CopiaPalavra(Palavra *p, Palavra *Rp)
+{
+    strncpy(Rp->palavra, p->palavra, strlen(p->palavra)+1);
+
+    for (int i = 1; i <= p->qtdAparicoes; i++)
+    {
+        Rp->qtdAparicoes++;
+
+        Rp->crts = (Caracteristicas **)realloc(Rp->crts, Rp->qtdAparicoes*sizeof(Caracteristicas *));
+
+        Rp->crts[i-1] = CopiaCarac(p->crts[i-1], Rp->crts[i-1]);
+    }
+
+    return Rp;
 }

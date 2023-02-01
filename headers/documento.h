@@ -27,4 +27,14 @@ double CalculaCosseno(Documento *doc1, Documento *doc2, double somatorio_doc2);
 
 char * ObtemClasse(Documento *doc);
 
+Documento * CopiaDoc(Documento *doc, Documento *Rdoc);
+
+void AtribuiSomaDasFrequencias_Doc(Documento *doc, Documento *Rdoc);
+
+int SomaFrequenciasDoc(Documento *doc);
+
+int PelaSomaFrequenciaCresc(const void *a, const void *b);
+
+int PelaSomaFrequenciaDecresc(const void *a, const void *b);
+
 #endif

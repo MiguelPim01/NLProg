@@ -5,6 +5,7 @@
 #include "headers/indices.h"
 #include "headers/palavra.h"
 #include "headers/indicePalavras.h"
+#include "headers/indiceDocs.h"
 #include "headers/arrayBusca.h"
 #include "headers/documento.h"
 
@@ -15,10 +16,11 @@ int main(int argc, char *argv[])
     FILE *fileBin;
     Indices *indices = NULL;
     IndicePalavras *palavrasBuscadas = NULL;
+    IndiceDocs *relatorioDocs = NULL;
     ArrayBusca *arrayB = NULL;
 
-    char caminho[100], texto[100], *token;
-    caminho[0]='\0'; texto[0]='\0';
+    char caminho[100], texto[100], palavra[50], *token;
+    caminho[0]='\0'; texto[0]='\0'; palavra[0]='\0';
 
     if (argc <= 2)
     {
@@ -67,7 +69,7 @@ int main(int argc, char *argv[])
 
             while (token)
             {
-                AdicionaPalavraBuscada(palavrasBuscadas, RetornaArrayPalavras(indices), token);
+                AdicionaPalavraBuscada(palavrasBuscadas, RetornaIndicePalavras(indices), token);
 
                 token = strtok(NULL, " ");
             } // Constroi array de de ponteiros para as palavras digitadas
@@ -84,6 +86,7 @@ int main(int argc, char *argv[])
             LiberaArrayBusca(arrayB);
             break;
         case '2': // CLASSIFICAR NOTICIA (30% nota)
+        {
             Documento *noticiaDigitada = InicializaDocumento_classificador(); 
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
             double *cossenos;
@@ -98,14 +101,14 @@ int main(int argc, char *argv[])
 
             while (token)
             {
-                CriaIndicePalavras_classificador(palavrasBuscadas, RetornaArrayPalavras(indices), token, RetornaIndiceDocs(indices));
+                CriaIndicePalavras_classificador(palavrasBuscadas, RetornaIndicePalavras(indices), token, RetornaIndiceDocs(indices));
 
                 token = strtok(NULL, " ");
             } // Realiza a criacao do documento para a classificador de classe
 
-            AtribuiTf_idfIdxPalavras(RetornaArrayPalavras(indices), RetornaIndiceDocs(indices), FLAG_CLASSIFICADOR);
+            AtribuiTf_idfIdxPalavras(RetornaIndicePalavras(indices), RetornaIndiceDocs(indices), FLAG_CLASSIFICADOR);
 
-            CriaDoc_classificador_indPalavras(palavrasBuscadas, noticiaDigitada, RetornaArrayPalavras(indices));
+            CriaDoc_classificador_indPalavras(palavrasBuscadas, noticiaDigitada, RetornaIndicePalavras(indices));
 
             cossenos = CriaArrayCossenos(RetornaIndiceDocs(indices), noticiaDigitada);
 
@@ -116,10 +119,21 @@ int main(int argc, char *argv[])
             LiberaDoc(noticiaDigitada);
             LiberaIndicePalavrasBuscadas(palavrasBuscadas);
             break;
+        }
         case '3': // RELATORIO DA PALAVRA (5% nota)
+            printf("\nDigite uma palavra: \n");
+            scanf("%[^\n]", palavra);
+
+            GeraRelatorioPalavra(indices, palavra);
             break;
         case '4': // RELATORIO DO DOCUMENTO (5% nota)
+        {
+            relatorioDocs = InicializaIndiceDocs(relatorioDocs);
+            GeraRelatorioDocs(indices, relatorioDocs);
+
+            LiberaIndiceDocs(relatorioDocs);
             break;
+        }
         default:
             printf("ERRO: Opcao Invalida!\n");
             break;
