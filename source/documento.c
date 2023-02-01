@@ -112,7 +112,7 @@ Documento * CarregaDocBin(Documento *doc, FILE *f)
 
 void ImprimeDoc(Documento *doc) 
 {
-    printf("Nome: %s\nNúmero de palavras: %d\nClasse: %s\n", doc->nome, doc->somaFreq, doc->classe);
+    printf("Nome: %s\nClasse: %s\n", doc->nome, doc->classe);
  
     /*for (int i = 0; i < doc->qtdPalavras; i++)
     {
@@ -246,4 +246,9 @@ int PelaSomaFrequenciaDecresc(const void *a, const void *b)
     const Documento **doc2 = (const Documento **)b;
 
     return (*doc2)->somaFreq - (*doc1)->somaFreq;
+}
+
+int RetornaNumeroPalavras(Documento *doc)
+{
+    return doc->somaFreq;
 }

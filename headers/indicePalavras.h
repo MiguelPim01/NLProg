@@ -41,6 +41,6 @@ int RetornaIndiceDaPalavra(IndicePalavras *p, Palavra *palavra);
 
 void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *doc, IndicePalavras *p);
 
-void RelatorioPalavra_indxPalavra(IndicePalavras *p, char *palavra);
+void RelatorioPalavra_indxPalavra(IndicePalavras *p, IndiceDocs *docs, char *palavra);
 
 #endif

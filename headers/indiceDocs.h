@@ -37,4 +37,6 @@ void OrdenaRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 
 void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 
+void ImprimeDocsPorIndice(IndiceDocs *docs, int *arrayIndicesInt);
+
 #endif

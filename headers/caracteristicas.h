@@ -42,6 +42,8 @@ Caracteristicas * CopiaCarac(Caracteristicas *crts, Caracteristicas *Rcrts);
 
 int RetornaFrequencia(Caracteristicas *crts);
 
+int RetornaPosicao(Caracteristicas *crts);
+
 int PelaFrequencia(const void *a, const void *b);
 
 #endif

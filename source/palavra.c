@@ -230,20 +230,23 @@ int StringIgualPalavra(Palavra *p, char *palavra)
     return !strncmp(p->palavra, palavra, strlen(palavra)+1);
 }
 
-void RelatorioPalavra(Palavra *p, char *palavra)
+void RelatorioPalavra(Palavra *p, char *palavra, int *arrayIndicesInt)
 {
     Palavra *Rp = AlocaPalavra(strlen(palavra)+1);
 
     Rp = CopiaPalavra(p, Rp);
 
-    printf("\nNúmero de documentos em que ""%s"" aparece: %d\n", Rp->palavra, Rp->qtdAparicoes);
-
     qsort(Rp->crts, Rp->qtdAparicoes, sizeof(Caracteristicas *), PelaFrequencia);
 
-    for (int i = 0; i < 10 && i < Rp->qtdAparicoes; i++)
+    int i = 0;
+    while (i < 10 && i < Rp->qtdAparicoes)
     {
-        ImprimeCaracteristicas(Rp->crts[i]);
+        arrayIndicesInt[i] = RetornaPosicao(Rp->crts[i]);
+        i++;
     }
+    if (i != 10) arrayIndicesInt[i] = -1;
+
+    printf("\nNúmero de documentos em que ""%s"" aparece: %d\n", Rp->palavra, Rp->qtdAparicoes);
 
     LiberaPalavra(Rp);
 }

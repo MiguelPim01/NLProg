@@ -115,5 +115,5 @@ void GeraRelatorioDocs(Indices *i, IndiceDocs *Rdocs)
 
 void GeraRelatorioPalavra(Indices *i, char *palavra)
 {
-    RelatorioPalavra_indxPalavra(i->palavras, palavra);
+    RelatorioPalavra_indxPalavra(i->palavras, i->docs, palavra);
 }

@@ -37,4 +37,6 @@ int PelaSomaFrequenciaCresc(const void *a, const void *b);
 
 int PelaSomaFrequenciaDecresc(const void *a, const void *b);
 
+int RetornaNumeroPalavras(Documento *doc);
+
 #endif

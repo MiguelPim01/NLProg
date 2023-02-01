@@ -134,6 +134,11 @@ Caracteristicas * CopiaCarac(Caracteristicas *crts, Caracteristicas *Rcrts)
     return Rcrts;
 }
 
+int RetornaPosicao(Caracteristicas *crts)
+{
+    return crts->posicao;
+}
+
 int PelaFrequencia(const void *a, const void *b)
 {
     const Caracteristicas **crtsA = (const Caracteristicas **)a;

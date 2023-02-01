@@ -44,7 +44,7 @@ void CriaDoc_classificador_palavra(Palavra *p, Documento *doc, int indicePalavra
 
 int StringIgualPalavra(Palavra *p, char *palavra);
 
-void RelatorioPalavra(Palavra *p, char *palavra);
+void RelatorioPalavra(Palavra *p, char *palavra, int *arrayIndicesInt);
 
 Palavra * CopiaPalavra(Palavra *p, Palavra *Rp);
 

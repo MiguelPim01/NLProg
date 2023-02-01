@@ -281,7 +281,21 @@ void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem)
     {
         printf("%d - ", i+1);
         ImprimeDoc(Rdocs->arrayDocs[i]);
+        printf("Número de palavras: %d\n", RetornaNumeroPalavras(Rdocs->arrayDocs[i]));
         printf("\n");
     }
     printf("-----------------------------\n");
+}
+
+void ImprimeDocsPorIndice(IndiceDocs *docs, int *arrayIndicesInt)
+{
+    int i = 0;
+
+    while (i < 10 && arrayIndicesInt[i] != -1)
+    {
+        printf("%d - ", i+1);
+        ImprimeDoc(docs->arrayDocs[arrayIndicesInt[i]]);
+        printf("\n");
+        i++;
+    }
 }

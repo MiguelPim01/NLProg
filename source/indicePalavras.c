@@ -284,21 +284,18 @@ void CriaDoc_classificador_indPalavras(IndicePalavras *p_buscadas, Documento *do
     }
 }
 
-void RelatorioPalavra_indxPalavra(IndicePalavras *p, char *palavra)
+void RelatorioPalavra_indxPalavra(IndicePalavras *p, IndiceDocs *docs, char *palavra)
 {
-    int flag = 0;
+    int arrayIndicesInt[10];
 
     for (int i = 0; i < p->qtdPalavras; i++)
     {
         if (StringIgualPalavra(p->arrayPalavras[i], palavra))
         {
-            RelatorioPalavra(p->arrayPalavras[i], palavra);
-            flag = 1;
+            RelatorioPalavra(p->arrayPalavras[i], palavra, arrayIndicesInt);
+            ImprimeDocsPorIndice(docs, arrayIndicesInt);
+            return;
         }
     }
-
-    if (!flag)
-    {
-        printf("A palavra ""%s"" não existe no índice de palavras.\n", palavra);
-    }
+    printf("A palavra ""%s"" não existe no índice de palavras.\n", palavra);
 }
