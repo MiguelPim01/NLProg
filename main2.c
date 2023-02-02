@@ -22,10 +22,19 @@ int main(int argc, char *argv[])
     char caminho[100], texto[100], palavra[50], *token;
     caminho[0]='\0'; texto[0]='\0'; palavra[0]='\0';
 
+    int K;
+
     if (argc <= 2)
     {
         printf("ERRO: Quantidade insuficiente de argumentos dados\n");
         printf("Para rodar corretamente: ./prog2 <arquivo_indices.bin> <numero_K>\n");
+        return 1;
+    }
+
+    sscanf(argv[2], "%d", &K);
+    if (K <= 0)
+    {
+        printf("ERRO: Valor de K dado é invalido. Digite um numero inteiro positivo!\n");
         return 1;
     }
 
@@ -90,7 +99,6 @@ int main(int argc, char *argv[])
             Documento *noticiaDigitada = InicializaDocumento_classificador(); 
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
             double *cossenos;
-            int K;
             char *classe = NULL;
 
             printf("\nDigite uma Noticia: ");
@@ -113,7 +121,6 @@ int main(int argc, char *argv[])
 
             cossenos = CriaArrayCossenos(RetornaIndiceDocs(indices), noticiaDigitada);
 
-            sscanf(argv[2], "%d", &K);
             classe = ClassificaNoticia(cossenos, RetornaIndiceDocs(indices), K);
 
             printf("\nClasse Deduzida: %s\n", classe);
@@ -124,8 +131,9 @@ int main(int argc, char *argv[])
             break;
         }
         case '3': // RELATORIO DA PALAVRA (5% nota)
-            printf("\nDigite uma palavra: \n");
+            printf("\nDigite uma palavra: ");
             scanf("%[^\n]", palavra);
+            printf("\n");
 
             GeraRelatorioPalavra(indices, palavra);
             break;

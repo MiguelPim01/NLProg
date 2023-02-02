@@ -22,6 +22,13 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    sscanf(argv[3], "%d", &K);
+    if (K <= 0)
+    {
+        printf("ERRO: Valor de K dado é invalido. Digite um numero inteiro positivo!\n");
+        return 1;
+    }
+
     sprintf(caminho, "%s", argv[1]);
     fileBin = fopen(caminho, "rb");
 
@@ -45,7 +52,6 @@ int main(int argc, char *argv[])
 
     
     // FUNCIONAMENTO DO PROGRAMA:
-    sscanf(argv[3], "%d", &K);
 
     // LENDO ARQUIVO DE SAIDA
     sprintf(caminho, "%s", argv[4]);

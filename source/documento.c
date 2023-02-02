@@ -112,7 +112,7 @@ Documento * CarregaDocBin(Documento *doc, FILE *f)
 
 void ImprimeDoc(Documento *doc) 
 {
-    printf("Nome: %s\nClasse: %s\n", doc->nome, doc->classe);
+    printf("Nome: %s Classe: %s\n", doc->nome, doc->classe);
  
     /*for (int i = 0; i < doc->qtdPalavras; i++)
     {
