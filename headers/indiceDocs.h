@@ -45,4 +45,8 @@ char ** CriaArrayClassesDeduzidas(IndiceDocs *docsTrain, IndiceDocs *docsTeste, 
 
 char ** CriaArrayClassesVerdadeiras(IndiceDocs *docsTeste, int K);
 
+char ** ObtemClassesUnicas(char **classesUnicas, char **classesVerdadeiras, int qtdDocs, int *qtdClasses);
+
+int ObtemPosicaoClasse(char *classe, char **classesUnicas, int qtdClasses);
+
 #endif

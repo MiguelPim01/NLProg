@@ -6,6 +6,8 @@
 #include "../headers/documento.h"
 #include "../headers/caracteristicas.h"
 
+#define QTD_INICIAL_CLASSES_ALLOC 10
+
 struct indiceDocs {
     Documento **arrayDocs;
     int qtdDocs;
@@ -330,7 +332,7 @@ char ** CriaArrayClassesDeduzidas(IndiceDocs *docsTrain, IndiceDocs *docsTeste, 
         free(cossenos);
     }
 
-    qsort(arrayClassesDeduzidas, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
+    // qsort(arrayClassesDeduzidas, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
 
     return arrayClassesDeduzidas;
 }
@@ -349,7 +351,54 @@ char ** CriaArrayClassesVerdadeiras(IndiceDocs *docsTeste, int K)
         arrayClassesVerdadeiras[i] = classe;
     }
 
-    qsort(arrayClassesVerdadeiras, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
+    // qsort(arrayClassesVerdadeiras, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
 
     return arrayClassesVerdadeiras;
+}
+
+char ** ObtemClassesUnicas(char **classesUnicas, char **classesVerdadeiras, int qtdDocs, int *qtdClasses)
+{
+    int i, j, contador = 0, mult = QTD_INICIAL_CLASSES_ALLOC;
+
+    classesUnicas = (char **)malloc(mult*sizeof(char *));
+    
+    for (i = 0; i < qtdDocs; i++)
+    {
+        int flagClasse = 0;
+        for (j = 0; j < contador; j++)
+        {
+            if (!strcmp(classesVerdadeiras[i], classesUnicas[j]))
+            {
+                flagClasse = 1;
+                printf("entrou\n");
+                break;
+            }
+        }
+        if (!flagClasse)
+        {
+            printf("cont %d\n", contador);
+            strncpy(classesUnicas[contador], classesVerdadeiras[i], strlen(classesVerdadeiras[i])+1);
+            printf("verdadeira: %s - unica: %s\n", classesVerdadeiras[i], classesUnicas[contador]);
+            contador++;
+        }
+        if (contador >= mult)
+        {
+            mult *= 2;
+            classesUnicas = (char **)realloc(classesUnicas, mult*sizeof(char *));
+        }
+    }
+    *qtdClasses = contador;
+
+    return classesUnicas;
+}
+
+int ObtemPosicaoClasse(char *classe, char **classesUnicas, int qtdClasses)
+{
+    for (int i = 0; i < qtdClasses; i++)
+    {
+        if (!strcmp(classe, classesUnicas[i]))
+        {
+            return i;
+        }
+    }
 }

@@ -6,7 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    FILE *fileBin, *fileTest;
+    FILE *fileBin, *fileTest, *fileSaida;
     
     Indices *indicesTrain = NULL, *indicesTeste = NULL;
 
@@ -47,8 +47,14 @@ int main(int argc, char *argv[])
     // FUNCIONAMENTO DO PROGRAMA:
     sscanf(argv[3], "%d", &K);
 
+    // LENDO ARQUIVO DE SAIDA
+    sprintf(caminho, "%s", argv[4]);
+    fileSaida = fopen(caminho, "w");
+
     classesDeduzidas = CriaArrayClassesDeduzidas(RetornaIndiceDocs(indicesTrain), RetornaIndiceDocs(indicesTeste), K);
     classesVerdadeiras = CriaArrayClassesVerdadeiras(RetornaIndiceDocs(indicesTeste), K);
+
+    GeraMatrizConfusao(indicesTeste, classesVerdadeiras, classesDeduzidas, fileSaida);
 
     // LIBERANDO MEMORIA
     free(classesDeduzidas);
@@ -57,6 +63,7 @@ int main(int argc, char *argv[])
     LiberaIndices(indicesTrain);
     fclose(fileBin);
     fclose(fileTest);
+    fclose(fileSaida);
 
     return 0;
 }

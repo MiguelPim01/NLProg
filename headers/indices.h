@@ -24,4 +24,8 @@ void GeraRelatorioPalavra(Indices *i, char *palavra);
 
 void GeraRelatorioDocs(Indices *i, IndiceDocs *Rdocs);
 
+void GeraMatrizConfusao(Indices *indices, char **classesVerdadeiras, char **classesDeduzidas, FILE *f);
+
+void ImprimeMatrizConfusao(int **matriz, int qtdClasses, FILE *f);
+
 #endif

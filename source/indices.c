@@ -117,3 +117,46 @@ void GeraRelatorioPalavra(Indices *i, char *palavra)
 {
     RelatorioPalavra_indxPalavra(i->palavras, i->docs, palavra);
 }
+
+void GeraMatrizConfusao(Indices *indices, char **classesVerdadeiras, char **classesDeduzidas, FILE *f)
+{
+    char **classesUnicas = NULL;
+    int qtdDocs = ObtemQtdDocumentos(indices->docs), qtdClasses;
+
+    classesUnicas = ObtemClassesUnicas(classesUnicas, classesVerdadeiras, qtdDocs, &qtdClasses);
+
+    int i = 0;
+    while (i < qtdClasses)
+    {
+        printf("%d - classe: %s\n", i, classesUnicas[i]);
+        i++;
+    }
+
+    /*
+    int matrizConfusao[qtdClasses][qtdClasses] = {0}, i, linha, coluna;
+    
+    for (i = 0; i < qtdDocs; i++)
+    {
+        linha = ObtemPosicaoClasse(classesVerdadeiras[i], classesUnicas, qtdClasses); // Obtem posição da linha, ou seja, classe verdadeira
+        coluna = ObtemPosicaoClasse(classesDeduzidas[i], clasesUnicas, qtdClasses); // Obtem posição da coluna, ou seja, classe deduzida;
+        matrizConfusao[linha][coluna]++;
+    }
+
+    ImprimeMatrizConfusao(matrizConfusao, classesUnicas, qtdClasses, f);
+    */
+
+   free(classesUnicas);
+}
+
+void ImprimeMatrizConfusao(int **matriz, int qtdClasses, FILE *f) {
+    int i, j;
+
+    for (i = 0; i < qtdClasses; i++)
+    {
+        for (j = 0; j < qtdClasses; j++)
+        {
+            printf("%d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
