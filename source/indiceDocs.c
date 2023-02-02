@@ -332,8 +332,6 @@ char ** CriaArrayClassesDeduzidas(IndiceDocs *docsTrain, IndiceDocs *docsTeste, 
         free(cossenos);
     }
 
-    // qsort(arrayClassesDeduzidas, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
-
     return arrayClassesDeduzidas;
 }
 
@@ -350,8 +348,6 @@ char ** CriaArrayClassesVerdadeiras(IndiceDocs *docsTeste, int K)
 
         arrayClassesVerdadeiras[i] = classe;
     }
-
-    // qsort(arrayClassesVerdadeiras, docsTeste->qtdDocs, sizeof(char *), OrdenaStrings);
 
     return arrayClassesVerdadeiras;
 }
@@ -370,15 +366,12 @@ char ** ObtemClassesUnicas(char **classesUnicas, char **classesVerdadeiras, int 
             if (!strcmp(classesVerdadeiras[i], classesUnicas[j]))
             {
                 flagClasse = 1;
-                printf("entrou\n");
                 break;
             }
         }
         if (!flagClasse)
         {
-            printf("cont %d\n", contador);
-            strncpy(classesUnicas[contador], classesVerdadeiras[i], strlen(classesVerdadeiras[i])+1);
-            printf("verdadeira: %s - unica: %s\n", classesVerdadeiras[i], classesUnicas[contador]);
+            classesUnicas[contador] = classesVerdadeiras[i];
             contador++;
         }
         if (contador >= mult)
@@ -401,4 +394,5 @@ int ObtemPosicaoClasse(char *classe, char **classesUnicas, int qtdClasses)
             return i;
         }
     }
+    return -1;
 }

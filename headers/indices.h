@@ -26,6 +26,14 @@ void GeraRelatorioDocs(Indices *i, IndiceDocs *Rdocs);
 
 void GeraMatrizConfusao(Indices *indices, char **classesVerdadeiras, char **classesDeduzidas, FILE *f);
 
-void ImprimeMatrizConfusao(int **matriz, int qtdClasses, FILE *f);
+int ** InicializaMatrizConfusao(int **matriz, int qtdClasses);
+
+int ** AlocaMatrizConfusao(int **matriz, int qtdClasses);
+
+void ImprimeMatrizConfusao(int **matriz, int qtdClasses, char **classes, FILE *f);
+
+double CalculaAcuracia(int **matriz, int qtdClasses, int qtdDocs);
+
+void LiberaMatrizConfusao(int **matriz, int qtdClasses);
 
 #endif
