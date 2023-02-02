@@ -218,7 +218,7 @@ double CalculaAcuracia(int **matriz, int qtdClasses, int qtdDocs)
     }
     acuracia = somatorio/qtdDocs;
 
-    printf("CU %lf\n", acuracia);
+    // printf("CU %lf\n", acuracia);
     return acuracia;
 }
 
