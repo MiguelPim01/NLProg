@@ -1,6 +1,8 @@
-     inf  at2  pot 
-inf  0    2    3    
-at2  0    4    1    
-pot  0    0    5    
+    cid poc pot eco ept
+cid  15  2   1   31  1   
+poc  17  4   1   27  1   
+pot  13  7   2   26  2   
+eco  17  3   3   27  0   
+ept  14  8   2   26  0   
 
-Acurácia: 60.00%
+Acurácia: 19.20%

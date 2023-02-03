@@ -120,19 +120,12 @@ void GeraRelatorioPalavra(Indices *i, char *palavra)
 
 void GeraMatrizConfusao(Indices *indices, char **classesVerdadeiras, char **classesDeduzidas, FILE *f)
 {
+    // Constroi vetor de classes únicas, usado para construir a matriz de confusão
     char **classesUnicas = NULL;
 
     int qtdDocs = ObtemQtdDocumentos(indices->docs), qtdClasses;
 
-    // Constroi vetor de classes únicas, usado para construir a matriz de confusão
     classesUnicas = ObtemClassesUnicas(classesUnicas, classesVerdadeiras, qtdDocs, &qtdClasses);
-
-    int j = 0;
-    while (j < qtdClasses)
-    {
-        printf("%d - classe: %s\n", j, classesUnicas[j]);
-        j++;
-    }
 
     // Inicialização e construção da matriz de confusão
     int **matrizConfusao = NULL;
@@ -160,10 +153,10 @@ void GeraMatrizConfusao(Indices *indices, char **classesVerdadeiras, char **clas
 void ImprimeMatrizConfusao(int **matriz, int qtdClasses, char **classes, FILE *f) {
     int i, j;
 
-    fprintf(f, "    ");
+    fprintf(f, "   ");
     for (i = 0; i < qtdClasses; i++)
     {
-        fprintf(f, " %s ", classes[i]);
+        fprintf(f, " %s", classes[i]);
     }
     fprintf(f, "\n");
 
@@ -173,7 +166,10 @@ void ImprimeMatrizConfusao(int **matriz, int qtdClasses, char **classes, FILE *f
         for (j = 0; j < qtdClasses; j++)
         {
             fprintf(f, "%d", matriz[i][j]);
-            for (int k = 0; k < 4-(matriz[i][j]/10); k++) fprintf(f, " "); // Formata matriz saída
+            // Ajustando formataçao matriz
+            if (matriz[i][j] < 10) fprintf(f, "   ");
+            else if (matriz[i][j] < 100) fprintf(f, "  ");
+            else fprintf(f, " ");
         }
         fprintf(f, "\n");
     }
@@ -218,7 +214,6 @@ double CalculaAcuracia(int **matriz, int qtdClasses, int qtdDocs)
     }
     acuracia = somatorio/qtdDocs;
 
-    // printf("CU %lf\n", acuracia);
     return acuracia;
 }
 
