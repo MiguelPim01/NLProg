@@ -47,16 +47,16 @@ char * ClassificaNoticia(double *cossenos, IndiceDocs *docs, int K);
 // Faz a copia de um indice de documentos para outro
 IndiceDocs * CopiaIndiceDocs(IndiceDocs *docs, IndiceDocs *Rdocs);
 
-
+// Acessa indice de docs para atribuir, em outra funcao, a soma das frequencias de cada documento em docs no documento de outro indice docs, Rdocs, usado no relatorio
 void AtribuiSomaDasFrequencias_Indice(IndiceDocs *docs, IndiceDocs *Rdocs);
 
 // Ordena relatorio de documentos ou em ordem crescente ou decrescente
 void OrdenaRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 
-// Imprime Relatorio de documentos
+// Imprime relatorio de documentos
 void ImprimeRelatorioDocs(IndiceDocs *Rdocs, int flagOrdem);
 
-
+// Imprime documentos do relatorio de palavra de acordo com os indices que estao na array de indices
 void ImprimeDocsPorIndice(IndiceDocs *docs, int *arrayIndicesInt);
 
 // Retorna array de todas as classes que foram deduzidas pelo classificador

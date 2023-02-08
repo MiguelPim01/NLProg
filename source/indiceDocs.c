@@ -62,13 +62,14 @@ int ObtemQtdDocumentos(IndiceDocs *docs)
 
 void ImprimeDocs(IndiceDocs *docs)
 {
-    int i;
+    // int i;
 
-    for (i = 0; i < docs->qtdDocs; i++)
+    printf("Número de documentos: %d\n", docs->qtdDocs);
+    /*for (i = 0; i < docs->qtdDocs; i++)
     {
         printf("doc %d: ", i);
         ImprimeDoc(docs->arrayDocs[i]);
-    }
+    }*/
 }
 
 Documento * AchaDocumento(IndiceDocs *docs, int posDocumento)

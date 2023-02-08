@@ -60,8 +60,8 @@ Indices * CarregaIndices(FILE *f, Indices *i, char *caminhoAux)
 
     FinalizaCaracDocumentos_indxPalavras(i->palavras, i->docs);
 
-    // ImprimeDocs(i->docs);
-    // ImprimePalavras(i->palavras);
+    ImprimeDocs(i->docs);
+    ImprimePalavras(i->palavras);
 
     return i;
 }
