@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     tamArg = strlen(caminhoTxt)-4; // diminui 4 do tamanho para nao considerar o '.txt'
 
     strncpy(caminho, caminhoTxt, tamArg); // copia o caminho sem o '.txt' para 'caminho'
+    caminho[tamArg] = '\0';
 
     fileTxt = fopen(caminhoTxt, "r");
 

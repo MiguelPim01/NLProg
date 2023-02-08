@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
 
     tamCaminho = strlen(caminho)-4;
     strncpy(caminhoPasta, caminho, tamCaminho);
+    caminhoPasta[tamCaminho] = '\0';
 
     // LENDO O ARQUIVO test.txt E ARMAZENANDO OS INDICES
     indicesTeste = CarregaIndices(fileTest, indicesTeste, caminhoPasta);

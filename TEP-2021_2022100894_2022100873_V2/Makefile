@@ -43,4 +43,4 @@ $(LIB): $(OBJ) ./objects/main1.o ./objects/main2.o ./objects/main3.o
 	ar -rcs $@ $^
 
 clean:
-	rm -rf ./objects/*.o $(PROJ_NAME_1) $(PROJ_NAME_2) $(PROJ_NAME_3)
+	rm -rf ./objects/*.o $(PROJ_NAME_1) $(PROJ_NAME_2) $(PROJ_NAME_3) $(LIB)

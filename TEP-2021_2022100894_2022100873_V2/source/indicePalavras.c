@@ -233,14 +233,14 @@ void LiberaIndicePalavras(IndicePalavras *p)
 
 void ImprimePalavras(IndicePalavras *p)
 {
-    int i;
-    
-    for (i = 0; i < p->qtdPalavras; i++)
+    // int i;
+
+    printf("Número de palavras diferentes: %d\n", p->qtdPalavras);
+    /*for (i = 0; i < p->qtdPalavras; i++)
     {
         printf("palavra %d: ", i);
         ImprimePalavra(p->arrayPalavras[i]);
-    }
-    // printf("    qtd: %d", p->qtdPalavras);
+    }*/
 }
 
 void LiberaIndicePalavrasBuscadas(IndicePalavras *p)

@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
     switch (opcao)
     {
-        case '1': // BUSCAR NOTICIA (20% nota)
+        case '1': // BUSCAR NOTICIA
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
         
             printf("\nBusque algo: ");
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
             LiberaIndicePalavrasBuscadas(palavrasBuscadas);
             LiberaArrayBusca(arrayB);
             break;
-        case '2': // CLASSIFICAR NOTICIA (30% nota)
+        case '2': // CLASSIFICAR NOTICIA
         {
             Documento *noticiaDigitada = InicializaDocumento_classificador(); 
             palavrasBuscadas = InicializaIndicePalavras(palavrasBuscadas);
@@ -130,14 +130,14 @@ int main(int argc, char *argv[])
             LiberaIndicePalavrasBuscadas(palavrasBuscadas);
             break;
         }
-        case '3': // RELATORIO DA PALAVRA (5% nota)
+        case '3': // RELATORIO DA PALAVRA
             printf("\nDigite uma palavra: ");
             scanf("%[^\n]", palavra);
             printf("\n");
 
             GeraRelatorioPalavra(indices, palavra);
             break;
-        case '4': // RELATORIO DO DOCUMENTO (5% nota)
+        case '4': // RELATORIO DO DOCUMENTO
         {
             relatorioDocs = InicializaIndiceDocs(relatorioDocs);
             GeraRelatorioDocs(indices, relatorioDocs);
