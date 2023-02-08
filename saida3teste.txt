@@ -1,8 +1,8 @@
-    cid poc pot eco ept
-cid  15  2   1   31  1   
-poc  17  4   1   27  1   
-pot  13  7   2   26  2   
-eco  17  3   3   27  0   
-ept  14  8   2   26  0   
+    opi poc eco ept reg
+opi  15  2   7   1   0   
+poc  15  1   7   2   0   
+eco  13  1   8   0   3   
+ept  22  0   2   0   1   
+reg  16  3   6   0   0   
 
 Acurácia: 19.20%
